@@ -1,8 +1,8 @@
 # Gollum 
 
-> CATRISSE Arthur 
-> DAGERI Kaan
-> DALBOUSIERE Hugo
+> * CATRISSE Arthur 
+> * DAGERI Kaan
+> * DALBOUSIERE Hugo
 
 
 # Level3
