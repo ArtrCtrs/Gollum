@@ -2,8 +2,42 @@
 
 #Level3
 
-Tout d'abord, après avoir remarqué que le schéma représentant le code de lvl_3 était très étendu, nous avons choisi de partir de la fin.
-Il y a 2 blocs vers lesquels arrivent tous les autres. 
+En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
 
 ![exemple](./img/3-1.PNG)
+![exemple](./img/3-2.PNG)
 
+Une fois dans IDA, après avoir remarqué que le schéma représentant le code de lvl_3 était très étendu en largeur, nous avons choisi d’analyser en premier les blocs du bas. Il y a 2 blocs vers lesquels arrivent tous les autres.
+Sur celui-ci, qui est situé au milieu en bas, on constate un return avec l’instruction « retn ». C’est donc le bloc qui terminera le programme. On renomme ce bloc en « end : ».
+
+![exemple](./img/3-3.PNG)
+
+Sur le deuxième bloc situé en bas (à gauche), la seule instruction effectuée est celle de rajouter 1 à une valeur située dans une case mémoire, puis de reboucler vers un bloc situé bien plus haut. C’est donc une instruction d’incrémentation. On renomme donc le bloc en « increment : » et la case mémoire en « [ebp+incremented] ».
+
+![exemple](./img/3-4.PNG)
+
+En remontant les blocs d’un niveau vers le haut, on différentie 2 types de blocs. Les premiers affichent un message, en appelant la fonction cprintf. Le message est stocké en tant que chaine de caractères grâce à « db ». Parmi les messages qui existent, on retrouve les 2 sur lesquels on était tombés en testant le programme. Après avoir affiché le message, le bloc d’instructions effectue un jump au bloc que nous avons renommé « end » pour terminer le process. Le deuxième type de bloc ne fait rien mis à part un jmp au bloc que nous avons renommé « increment ».
+On va maintenant remonter en haut des blocs.
+Le bloc tout en haut est celui qui est appelé lorsqu’on choisit le niveau 3. On sait que c’est dans ce bloc que le code teste la présence ou l’absence de lettres entrées par l’utilisateur, puisque le jump conditionnel peut aller directement au bloc de message d’erreur que l’on reçoit lorsqu’on ne rentre aucun caractère avant de valider.
+Dans le cas où des caractères sont rentrés, on tombe sur un petit bloc d’instructions qui initialise à 0 la valeur de [ebp+incremental] grâce à l’instruction mov.
+
+![exemple](./img/3-5.PNG)
+
+ Ensuite, le bloc jump jusqu’à un autre bloc, le même que celui vers lequel le bloc d’incrémentation retourne. C’est donc le bloc de départ d’une boucle. La sortie de cette boucle s’effectue uniquement lorsque le joueur a trouvé la solution, donc lorsque le programme a itéré à travers toutes les lettres rentrées sans être tombé sur un message d’erreur (et donc être sorti du programme plus tôt que prévu). Le test de sorti s’effectue entre les valeurs contenues dans eax et edx. Sachant que notre valeur incrémentée [ebp+incremented] a été mov dans eax, la sortie de cette boucle s’effectue bien lorsque notre incrémentation atteint une certaine valeur.
+ 
+ ![exemple](./img/3-6.PNG)
+ 
+ En descendant d’un niveau, on tombe sur un bloc qui nous donne un indice, en comparant la valeur de [ebp+incremented] à 6 avec cmp. De plus, derrière cette instruction, on trouve des blocs représentant un switch, avec 7 possibilités. On en déduit que le nombre de caractères du mot à trouver est de 7. (On boucle 7 fois, de 0 à 6).
+ 
+  ![exemple](./img/3-7.PNG)
+  
+  On se penche maintenant sur les 7 blocks du switch.  Ce sont ces blocks qui déterminent si l’on continue à boucler, ou on s’arrête avec un message d’erreur.
+L’instruction cmp s’effectue entre la valeur de al, qui est les 8 bits les plus bas de eax, et un chiffre (Ici 53h en hexadecimal pour le premier). En prenant la valeur en ascii de 83 (l’équivalent de 53 en décimal), on trouve une lettre correspondante (ici un S majuscule)
+
+ ![exemple](./img/3-9.PNG)
+ 
+Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve S m e a g o l.
+
+  ![exemple](./img/3-10.PNG)
+ 
+ 
