@@ -4,6 +4,22 @@
 > * DAGERI Kaan
 > * DALBOUSIERE Hugo
 
+# Level1
+
+Le premier niveau nous demande d'entrer un nombre :
+
+![exemple](./img/1-input.png)
+
+Etudions le premier bloc.
+
+![exemple](./img/1-0.png)
+
+![exemple](./img/1-1.png)
+
+![exemple](./img/1-2.png)
+
+![exemple](./img/1-3.png)
+
 # Level3
 
 En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
