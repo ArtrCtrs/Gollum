@@ -38,17 +38,36 @@ Le second niveau nous demande d'entrer un mot de passe :
 
 ![exemple](./img/2-0.png)
 
+Etudions le premier bloc.
+
 ![exemple](./img/2-1.png)
 
+On peut voir qu'une longue chaîne de caractères est stockée à l'adresse ebp+long_text et est poussée dans la stack.  
+Aussi, sa longueur est stockée à l'adresse ebp+long_text_length.  
+L'entrée utilisateur est stockée à l'adresse ebp+user_input et sa longueur est stockée à l'adresse ebp+user_input_length.  
+Enfin deux compteurs sont initialisés et stockés :  
+counter_1 à 0 dans l'adresse ebp+counter_1  
+counter_2 à 256 dans l'adresse ebp+counter_2   
+  
 ![exemple](./img/2-2.png)
 
+Dans le bloc suivant, on aperçoit un jump conditionnel qui est valide uniquement lorsque la longueur de long_text est inférieure à la valeur de counter_2.  
+  
 ![exemple](./img/2-3.png)
+
+Si la condition est validée, le bloc suivant affichera un message de succès en vert puis quittera la fonction level_2 :  
+
+![exemple](./img/2-6.png)
+
+Sinon, on continue dans un bloc qui semble être une boucle :  
 
 ![exemple](./img/2-4.png)
 
+
+
 ![exemple](./img/2-5.png)
 
-![exemple](./img/2-6.png)
+
 
 ![exemple](./img/2-7.png)
 
