@@ -4,6 +4,49 @@
 > * DAGERI Kaan
 > * DALBOUSIERE Hugo
 
+# Level4
+
+![exemple](./img/1-0.png)
+
+On peut aperçevoir que le programme nous demande un chiffre dans le premier niveau.
+
+![exemple](./img/1-1.png)
+
+Le premier bloc traite l'entrée utilisateur pour supprimer le charactère "entrée", ou "\n".  
+On peut voir qu'une chaîne de charactères mystérieuse est aussi stockée en mémoire dans ebp+var_10.  
+Ensuite, il regarde si des charactères sont présents dans l'entrée utilisateur.  
+Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_1 :  
+
+![exemple](./img/1-2.png)
+
+Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc :  
+
+![exemple](./img/1-3.png)
+
+Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
+On stocke la longeur de l'entrée utilisateur dans ebx, puis la longeur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
+On peut voir que le mot de passe caché fait 6 charactères en débuggant avec gdb.  
+On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 6 charactères (jump not below).  
+Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_1 :  
+
+![exemple](./img/1-7.png)
+
+Si l'entrée utilisateur dait au moins 6 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
+
+![exemple](./img/1-4.png)
+
+Ce bloc passe directement à la suite.
+
+![exemple](./img/1-5.png)
+
+On arrive à l'entrée d'une boucle.  
+C'est là que le code devient intéréssant.  
+
+![exemple](./img/1-6.png)
+
+![exemple](./img/1-8.png)
+![exemple](./img/1-9.png)
+![exemple](./img/1-10.png)
 
 # Level3
 
