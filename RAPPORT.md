@@ -14,9 +14,19 @@ Etudions le premier bloc.
 
 ![exemple](./img/1-0.png)
 
+On push l'entrée utilisateur dans la stack afin d'appeller la fonction atoi.  
+Cette fonction convertis la string en un int.
+On récupère le résultat de eax et on le déplace dans l'adresse ebp+var_C puis on compare cette valeur à 501337h ou encore 5247799 en décimal.  
+Si cela ne corresponds pas (jump if not zero) on saute vers le bloc suivant qui affichera un message d'erreur puis quittera la fonction level_1 :
+
 ![exemple](./img/1-1.png)
 
+Sinon, l'entrée utilisateur corresponds (le zero flag est à 1) et l'on saute sur le bloc suivant qui affiche un message de succès en vert :
+
 ![exemple](./img/1-2.png)
+
+On mets aussi 1 dans eax pour indiquer la bonne terminaison de la fonction.  
+Enfin, on arrive au dernier bloc qui ne fait que retourner à la fonction appellante.  
 
 ![exemple](./img/1-3.png)
 
@@ -43,24 +53,24 @@ Dans le cas où des caractères sont rentrés, on tombe sur un petit bloc d’in
 
 ![exemple](./img/3-5.PNG)
 
- Ensuite, le bloc jump jusqu’à un autre bloc, le même que celui vers lequel le bloc d’incrémentation retourne. C’est donc le bloc de départ d’une boucle. La sortie de cette boucle s’effectue uniquement lorsque le joueur a trouvé la solution, donc lorsque le programme a itéré à travers toutes les lettres rentrées sans être tombé sur un message d’erreur (et donc être sorti du programme plus tôt que prévu). Le test de sorti s’effectue entre les valeurs contenues dans eax et edx. Sachant que notre valeur incrémentée [ebp+incremented] a été mov dans eax, la sortie de cette boucle s’effectue bien lorsque notre incrémentation atteint une certaine valeur.
+Ensuite, le bloc jump jusqu’à un autre bloc, le même que celui vers lequel le bloc d’incrémentation retourne. C’est donc le bloc de départ d’une boucle. La sortie de cette boucle s’effectue uniquement lorsque le joueur a trouvé la solution, donc lorsque le programme a itéré à travers toutes les lettres rentrées sans être tombé sur un message d’erreur (et donc être sorti du programme plus tôt que prévu). Le test de sorti s’effectue entre les valeurs contenues dans eax et edx. Sachant que notre valeur incrémentée [ebp+incremented] a été mov dans eax, la sortie de cette boucle s’effectue bien lorsque notre incrémentation atteint une certaine valeur.
  
- ![exemple](./img/3-6.PNG)
+![exemple](./img/3-6.PNG)
  
- En descendant d’un niveau, on tombe sur un bloc qui nous donne un indice, en comparant la valeur de [ebp+incremented] à 6 avec cmp. De plus, derrière cette instruction, on trouve des blocs représentant un switch, avec 7 possibilités. On en déduit que le nombre de caractères du mot à trouver est de 7. (On boucle 7 fois, de 0 à 6).
+En descendant d’un niveau, on tombe sur un bloc qui nous donne un indice, en comparant la valeur de [ebp+incremented] à 6 avec cmp. De plus, derrière cette instruction, on trouve des blocs représentant un switch, avec 7 possibilités. On en déduit que le nombre de caractères du mot à trouver est de 7. (On boucle 7 fois, de 0 à 6).
  
-  ![exemple](./img/3-7.PNG)
+![exemple](./img/3-7.PNG)
   
-  On se penche maintenant sur les 7 blocks du switch.  Ce sont ces blocks qui déterminent si l’on continue à boucler, ou on s’arrête avec un message d’erreur.
+On se penche maintenant sur les 7 blocks du switch.  Ce sont ces blocks qui déterminent si l’on continue à boucler, ou on s’arrête avec un message d’erreur.
 L’instruction cmp s’effectue entre la valeur de al, qui est les 8 bits les plus bas de eax, et un chiffre (Ici 53h en hexadecimal pour le premier). En prenant la valeur en ascii de 83 (l’équivalent de 53 en décimal), on trouve une lettre correspondante (ici un S majuscule)
 
- ![exemple](./img/3-9.PNG)
+![exemple](./img/3-9.PNG)
  
 Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve S m e a g o l.
 
-  ![exemple](./img/3-10.PNG)
+![exemple](./img/3-10.PNG)
   
-  # Level4
+# Level4
 
 ![exemple](./img/4-0.png)
 
