@@ -29,7 +29,7 @@ On peut voir que le mot de passe caché fait 6 charactères en débuggant avec g
 On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 6 charactères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
-![exemple](./img/1-8.png)
+![exemple](./img/1-7.png)
 
 Si l'entrée utilisateur fait au moins 6 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
 
@@ -41,11 +41,19 @@ On saute directement au prochain bloc.
 
 On arrive à l'entrée d'une boucle.  
 C'est là que le code devient intéréssant.  
-
-![exemple](./img/1-6.png)
-
 Ce bloc déplace la string contenue à l'adresse ebp+var_C dans eax puis regarde si son premier caractère n'est pas nul.
 Si le caractère est nul, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 : 
+
+![exemple](./img/1-8.png)
+
+Si le caractère n'est pas nul, la boucle continue.  
+Ce bloc stocke le charactère du mot de passe caché de l'itération courante dans ecx.  
+Il récupère aussi le charactère de l'entrée utilisateur de l'itération courante, puis effectue une opération XOR dessus.  
+Enfin, la valeur est stockée dans eax, et plus précisément dans al (premier byte de eax).  
+Une fois ces deux charactères stockés, on les compare.  
+S'ils ne sont pas sont égaux (code ASCII différent), le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 : 
+
+![exemple](./img/1-6.png)
 
 ![exemple](./img/1-9.png)
 ![exemple](./img/1-10.png)
