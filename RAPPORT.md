@@ -48,7 +48,7 @@ Lorsqu’on teste cette première lettre dans le programme, le message d’erreu
 
 ![exemple](./img/4-0.png)
 
-On peut aperçevoir que le programme nous demande un chiffre dans le premier niveau.
+On peut aperçevoir que le programme nous demande un mot de passe dans le quatrième niveau.
 
 ![exemple](./img/4-1.png)
 
