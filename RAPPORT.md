@@ -32,6 +32,26 @@ Enfin, on arrive au dernier bloc qui ne fait que retourner à la fonction appell
 
 Le flag est donc **5247799**.
 
+# Level2
+
+Le second niveau nous demande d'entrer un mot de passe :
+
+![exemple](./img/2-0.png)
+
+![exemple](./img/2-1.png)
+
+![exemple](./img/2-2.png)
+
+![exemple](./img/2-3.png)
+
+![exemple](./img/2-4.png)
+
+![exemple](./img/2-5.png)
+
+![exemple](./img/2-6.png)
+
+![exemple](./img/2-7.png)
+
 # Level3
 
 En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
