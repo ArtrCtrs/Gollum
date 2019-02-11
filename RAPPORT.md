@@ -30,6 +30,8 @@ Enfin, on arrive au dernier bloc qui ne fait que retourner à la fonction appell
 
 ![exemple](./img/1-3.png)
 
+Le flag est donc **5247799**.
+
 # Level3
 
 En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
@@ -147,6 +149,6 @@ for i in hidden_password:
 print password
 ```
 
-On trouve alors le mot de passe en clair : debugm3
+On trouve alors le mot de passe en clair : **debugm3**
  
  
