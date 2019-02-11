@@ -52,24 +52,48 @@ counter_2 à 256 dans l'adresse ebp+counter_2
 ![exemple](./img/2-2.png)
 
 Dans le bloc suivant, on aperçoit un jump conditionnel qui est valide uniquement lorsque la longueur de long_text est inférieure à la valeur de counter_2.  
-  
-![exemple](./img/2-3.png)
-
 Si la condition est validée, le bloc suivant affichera un message de succès en vert puis quittera la fonction level_2 :  
 
 ![exemple](./img/2-6.png)
 
 Sinon, on continue dans un bloc qui semble être une boucle :  
 
-![exemple](./img/2-4.png)
+![exemple](./img/2-3.png)
 
+Cette boucle déplace les pointeurs des chaînes de caractères user_input et long_text en fonction des valeurs de counter_1 et counter_2.  
+counter_1 s'incrémentant toujours de 1, le pointeur de user_input se déplacera de 1 charactère.  
+counter_2 s'incrémentant toujours de 5, le pointeur de long_text se déplacera de 5 charactères.  
+Attention, il faut prendre en compte que counter_2 a été initialisé à la valeur 256.  
+Enfin, on récupères les premiers charactères de user_input et de long_text puis on les compare pour voir s'ils sont identiques.  
 
+S'ils ne sont pas identiques, le bloc suivant affichera un message d'erreur en rouge puis quittera la fonction level_2 :  
+![exemple](./img/2-4.png)  
+
+S'ils sont identiques, on passe au bloc suivant qui va incrémenter les compteurs :  
 
 ![exemple](./img/2-5.png)
 
+Après l'incrémentation des compteurs, on revient dans la boucle pour tester les prochains charactères.
 
+Suite à ces observations, on peut déduire que le flag à trouver commence au charactère 256 de la chaîne de caractères long_text et contiendra toutes les lettres qui se situent par incrément de 5 plus loin, jusqu'à ce que l'on sorte de long_text.  
+On peut faire un script Python simpliste qui implémente ce comportement :  
+```python
+mysterious_string = "AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GcA%cAa%2A%vHA%deA%3Af%IA%ieA%4sA%JAh%fA%a5A%KnA%gAd%6A%gLA%hoA%7Ab%MA%liA%8iA%NAn"
 
-![exemple](./img/2-7.png)
+index = 256
+done = False
+flag = ''
+
+while not done:
+    if len(mysterious_string) >= index:
+        flag += mysterious_string[index]
+        index += 5
+    else:
+        done = True
+
+print "The flag is " + flag
+```
+On trouve alors le mot de passe en clair : **cavefishandgoblin**
 
 # Level3
 
