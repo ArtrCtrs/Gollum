@@ -148,7 +148,11 @@ On peut aperçevoir que le programme nous demande un mot de passe dans le quatri
 
 Le premier bloc traite l'entrée utilisateur pour supprimer le charactère "entrée", ou "\n".  
 On peut voir qu'une chaîne de charactères mystérieuse est aussi stockée en mémoire dans ebp+var_10.  
-Ensuite, il regarde si des charactères sont présents dans l'entrée utilisateur.  
+IDA nous facilite la tâche grâce à la HEX view qui nous permet de voir les charactères stockés au format hexadécimal :  
+
+![exemple](./img/4-hex.png)
+
+Ensuite, le bloc regarde si des charactères sont présents dans l'entrée utilisateur.  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-2.png)
