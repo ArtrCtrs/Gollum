@@ -2,7 +2,7 @@
 
 > * CATRISSE Arthur
 > * DAGERI Kaan
-> * DALBOUSIERE Hugo
+> * DALBOUSSIERE Hugo
 
 # Level 1
 
@@ -163,7 +163,7 @@ Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc 
 
 Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
 On stocke la longeur de l'entrée utilisateur dans ebx, puis la longeur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
-On peut voir que le mot de passe caché fait 6 charactères en débuggant avec gdb.  
+On peut voir que le mot de passe caché fait 7 charactères en débuggant avec gdb.  
 On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 6 charactères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
@@ -199,13 +199,13 @@ S'ils ne sont pas sont égaux (code ASCII différent), le bloc suivant affichera
 S'ils sont égaux (même code ASCII), on revient au début de la boucle.
 
 On comprends maintenant que le mot de passe à trouver corresponds à une chaîne de 7 caractères dont chaque caractère corresponds au xor de 187 des charactères suivants :
-0DF
-0DE
-0D9
-0CE
-0DC
-0D6
-88
+0DF  
+0DE  
+0D9  
+0CE  
+0DC  
+0D6  
+88  
 
 On peut faire un simple script en Python qui effectue le calcul puis affiche le mot de passe :
 
