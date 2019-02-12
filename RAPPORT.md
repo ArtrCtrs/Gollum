@@ -220,22 +220,137 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 6
 
+![level_6_a](./img/lev_6_0.png)
+
+Admetons tout d'abors que nous ne connaissons pas lord of the ring sinon l'exercice sera moins drôle.
+
 ![level_6_a](./img/lev_6_a.png)
+
+Tout dabors ce morceaux permet de remplacer le retour chariot (\n) par le charactere fin de chaine appele null (\0).
 
 ![level_6_a](./img/lev_6_b.png)
 
+Ensuite nous récupérons ma taille réel (sans retour chariot) et nous la mettons dans la variable user_string_len.
+
 ![level_6_a](./img/lev_6_c.png)
+
+Cette partie du code peut paraire au premier abord compliqué mais nous allons voir que la compréhension de cette partie est essenciel dans la résolution de l'exercice.
+
+Tout d'abord nous une opération `stosd`, cette opération peut d'apparenta à la fonction `memset` en C.
+En prenant les paramètre edi, ecx et edx en compte nous avons `memset(var_D4, 0, 48)` pour le premier buffer (partant de var_D4).
+Il en est de même pour le second buffer partant de var_254 `memset(var_254, 0, 96)`
+Dans les deux cas nous avons après chaque opération stosd une suite de 6 effectations pour chaque buffer.
+
+Pour faire simple nous initialison deux buffer à 0 l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
+
+Pour terminer il y a une verification de la taille de la chaine saisie par l'utilisateur.
+
+Première indice : la taille de la chaine est de 6
+
+Dans le cas actuelle des choses nous avons $256^6$ possibilité. Avec les processeur actuelle nous pouvons brute force facillement ce challenge en moins de 10 seconde. Mais pour le plaisir nous allons continué notre analyse.
 
 ![level_6_a](./img/lev_6_d.png)
 
+Ensuite nous pouvons voir que nous entrons dans une boucle, en paramètre un compteur et une condition de sortie qui est la taille de la chaine.
+
 ![level_6_a](./img/lev_6_e.png)
+
+Dans ce bloc nous parcourons la chaine de charactere en ce déplacent à l'aide du compteur afin de le mettre dans une variable que nous appelerons ici caractere_brut.
+
+Ensuite nous appliquons une opération de shift right de 4 sur le caractere_brut ce qui revient à diviser par 16 la valeur décimale corresponds au caractère dans la table ASCII.
+
+Cette valeur est stocké dans une variable que nous appelerons caractere_shifted.
+
+En suite nous reprenons le caractere_brut afin d'y appliquer une opération ET logique avec la valeur 15 et on la stock sur la variable caractere_anded.
+
+Puis nous recupérons le caractere_shifted dans eax et le compteur dans edx que nous multiplions par 16 suite à une opération de shift left par 4.
+
+après cela nous faison la somme (caractere_shifted + cmp * 4)
+
+Ensuite nous allons chercher dans le buffer 1 (var_D4 memset) à l'adress [ebp+eax*2+var_4] afin de verifier si nous tombons sur un 0 ou un 1, si la valeur est un 1 cela veux dire que le caractere courant passe la premiere condition, dans le cas contraire ou l'on tombe sur un zero on jump vers le message d'erreur.
+
+En résumé pour passer la condition de ce bloque il faut que le caractere courant passe la condition suivante :
+var_D4[(char/16 + cmpt*16) * 2] == 1
 
 ![level_6_a](./img/lev_6_f.png)
 
+Dans ce bloque nous effectuons un second test sur la chaine entrer par l'utilisateur. Ce test n'ai pas effectué si l'on ne passe par la condition précédente.
+
+Le second teste est similaire au premier sauf que cette fois on vérifie dans le second buffer en utilise caracter_anded.
+
+En résumé pour passer la condition de ce bloque il faut que le caractere courant passe la condition suivante :
+var_254[()(char & 15) + (cmpt*16)) * 4] == 1
+
 ![level_6_a](./img/lev_6_g.png)
+
+Le second teste passer on increment le compteur afin de vérifier le caractère suivant.
+
+A ce stade afin de récupérer le flag nous pourrions utiliser le script suivant :
+
+```python
+#!/usr/bin/python
+adresses_buffer1 = [0xD4, 0xCC, 0xAE, 0x88, 0x6C, 0x4E, 0x26]
+adresses_buffer2 = [0x254, 0x224, 0x210, 0x1B8, 0x174, 0x138, 0x108]
+
+buf1_target = []
+buf2_target = []
+
+for i in range(1, len(adresses_buffer1)):
+	buf1_target.append(adresses_buffer1[0]-adresses_buffer1[i])
+	buf2_target.append(adresses_buffer2[0]-adresses_buffer2[i])
+
+res = "Flag is : "
+for i in range (0,6):
+	for c in range(0,127):
+		if ((c/16) + (i*16))*2 == buf1_target[i]:
+			if ((c & 15) + (i*16))*4 == buf2_target[i]:
+				res += str(chr(c))
+
+print res
+```
 
 ![level_6_a](./img/lev_6_h.png)
 
+Une fois que les 6 caracteres passe les deux conditions nous sortont de la boucle pour arriver au bloque affichant le message de succès et aussi la "répose" du moins un gros indice permetant de determiner le flag.
+
+En prenant en compte cette indice nous pouvons améliorer notre script est passer à celui ci dessous :
+
+```python
+#!/usr/bin/python
+adresses_buffer1 = [0xD4, 0xCC, 0xAE, 0x88, 0x6C, 0x4E, 0x26]
+adresses_buffer2 = [0x254, 0x224, 0x210, 0x1B8, 0x174, 0x138, 0x108]
+
+buf1_target = []
+buf2_target = []
+
+chars = [
+    ['L', 'l'],
+    ['I', 'i', '1'],
+    ['G', 'g', '6', '9'],
+    ['H', 'h'],
+    ['T', 't', '7'],
+    ['S', 's', '5']
+]
+
+for i in range(1, len(adresses_buffer1)):
+	buf1_target.append(adresses_buffer1[0]-adresses_buffer1[i])
+	buf2_target.append(adresses_buffer2[0]-adresses_buffer2[i])
+
+res = "Flag is : "
+
+for i in range (0,6):
+	for c in chars[i]:
+		if ((ord(c)/16) + (i*16))*2 == buf1_target[i]:
+			if ((ord(c) & 15) + (i*16))*4 == buf2_target[i]:
+				res += str(chr(ord(c)))
+
+print res
+```
+
 ![level_6_a](./img/lev_6_i.png)
 
+Pour terminer dans tout les cas de figure nous passons par ce bloc qui est la fin de la fonction
+
 ![level_6_a](./img/lev_6_j.png)
+
+Le script lancer nous trouvons le flag qui est : **L1gH7s**
