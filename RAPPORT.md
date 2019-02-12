@@ -220,22 +220,22 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 6
 
-![level_6_a](./img/level_6_a.png)
+![level_6_a](./img/lev_6_a.png)
 
-![level_6_a](./img/level_6_b.png)
+![level_6_a](./img/lev_6_b.png)
 
-![level_6_a](./img/level_6_c.png)
+![level_6_a](./img/lev_6_c.png)
 
-![level_6_a](./img/level_6_d.png)
+![level_6_a](./img/lev_6_d.png)
 
-![level_6_a](./img/level_6_e.png)
+![level_6_a](./img/lev_6_e.png)
 
-![level_6_a](./img/level_6_f.png)
+![level_6_a](./img/lev_6_f.png)
 
-![level_6_a](./img/level_6_g.png)
+![level_6_a](./img/lev_6_g.png)
 
-![level_6_a](./img/level_6_h.png)
+![level_6_a](./img/lev_6_h.png)
 
-![level_6_a](./img/level_6_i.png)
+![level_6_a](./img/lev_6_i.png)
 
-![level_6_a](./img/level_6_j.png)
+![level_6_a](./img/lev_6_j.png)
