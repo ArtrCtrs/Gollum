@@ -250,9 +250,25 @@ Le niveau 7 nous demande d'entrer un nombre.
 
 ![level_7_1](./img/7-0.png)
 
+Contrairement aux autres niveaux, il n'est pas possible de visualiser le diagramme de blocs avec IDA.  
+Ainsi, nous allons suivre les instructions directement dans la mémoire.  
+
 ![level_7_1](./img/7-1.png)
 
+Le premier bloc récupère l'entrée utilisateur et la stocke à l'adresse ebp+8.  
+
 ![level_7_2](./img/7-2.png)
+
+On passe ensuite au second bloc "début" qui appelle la fonction atoi pour convertir l'entrée utilisateur en un int.  
+On récupère le résultat de eax pour le stocker à l'adresse ebp-0Ch.  
+Le résultat est aussi poussé dans la pile, mais un xor sur eax avec lui-même est effectué ce qui a comme conséquence de mettre la valeur 0 dans eax (quelque soit sa valeur précédente car un xor d'un nombre avec lui-même renverra toujours 0).  
+  
+On peut voir qu'un jump if zero suit ce xor.  
+Nous avons déduit que eax aurait toujours la valeur 0 après le xor, on peut donc en déduire que toutes les instructions du bloc suivant ce jump if zero ne seront jamais atteintes.  
+
+On saute donc à l'étiquette loc_8048CAC+1 soit loc_8048CAD.  
+IDA n'affiche pas le bloc à cette adresse, mais on peut voir dans gdb que l'instruction effectuée à cette adresse est un pop de eax.  
+La dernière valeur poussée dans la stack étant l'entrée utilisateur au format int, on insérera celle-ci dans le registre eax.  
 
 ![level_7_3](./img/7-3.png)
 
