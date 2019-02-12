@@ -81,6 +81,7 @@ Le counter_1 ne sert qu'à itérer sur l'entrée de l'utilisateur.
 On peut faire un script Python simpliste qui implémente ce comportement :  
 
 ```python
+#!/usr/bin/python
 mysterious_string = "AAA%AAsAABAA$AAnAACAA-AA(AADAA;AA)AAEAAaAA0AAFAAbAA1AAGAAcAA2AAHAAdAA3AAIAAeAA4AAJAAfAA5AAKAAgAA6AALAAhAA7AAMAAiAA8AANAAjAA9AAOAAkAAPAAlAAQAAmAARAAoAASAApAATAAqAAUAArAAVAAtAAWAAuAAXAAvAAYAAwAAZAAxAAyAAzA%%A%sA%BA%$A%nA%CA%-A%(A%DA%;A%)A%EA%aA%0A%FA%bA%1A%GcA%cAa%2A%vHA%deA%3Af%IA%ieA%4sA%JAh%fA%a5A%KnA%gAd%6A%gLA%hoA%7Ab%MA%liA%8iA%NAn"
 
 index = 256
@@ -210,6 +211,7 @@ On comprends maintenant que le mot de passe à trouver corresponds à une chaîn
 On peut faire un simple script en Python qui effectue le calcul puis affiche le mot de passe :
 
 ```python
+#!/usr/bin/python
 hidden_password = [0xDF, 0xDE, 0xD9, 0xCE, 0xDC, 0xD6, 0x88]
 
 password = ''
@@ -224,13 +226,29 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 5
 
+![level_5](./img/5_a.png)
+
+![level_5](./img/5_b.png)
+
+![level_5](./img/5_c.png)
+
+![level_5](./img/5_d.png)
+
 ![level_5](./img/lvl5_a.png)
+
+![level_5](./img/5_e.png)
 
 ![level_5](./img/lvl5_b.png)
 
+![level_5](./img/5_f.png)
+
 ![level_5](./img/lvl5_c.png)
 
+![level_5](./img/5_g.png)
+
 ![level_5](./img/lvl5_d.png)
+
+![level_5](./img/5_h.png)
 
 ![level_5](./img/lvl5_e.png)
 
@@ -440,6 +458,7 @@ On peut faire un simple script en Python qui commence avec le nombre 4919 shift�
 Le script incrémentera de 1 le nombre jusqu'à ce que le 4ème bit en partant de la droite soit changé (cette valeur sera excluse).  
 
 ```python
+#!/usr/bin/python
 target = 4919
 binary_target_start = bin(4919 << 3)
 
