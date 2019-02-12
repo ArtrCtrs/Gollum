@@ -2,7 +2,7 @@
 
 > * CATRISSE Arthur
 > * DAGERI Kaan
-> * DALBOUSIERE Hugo
+> * DALBOUSSIERE Hugo
 
 # Level 1
 
@@ -148,7 +148,11 @@ On peut aperçevoir que le programme nous demande un mot de passe dans le quatri
 
 Le premier bloc traite l'entrée utilisateur pour supprimer le charactère "entrée", ou "\n".  
 On peut voir qu'une chaîne de charactères mystérieuse est aussi stockée en mémoire dans ebp+var_10.  
-Ensuite, il regarde si des charactères sont présents dans l'entrée utilisateur.  
+IDA nous facilite la tâche grâce à la HEX view qui nous permet de voir les charactères stockés au format hexadécimal :  
+
+![exemple](./img/4-hex.png)
+
+Ensuite, le bloc regarde si des charactères sont présents dans l'entrée utilisateur.  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-2.png)
@@ -159,13 +163,13 @@ Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc 
 
 Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
 On stocke la longeur de l'entrée utilisateur dans ebx, puis la longeur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
-On peut voir que le mot de passe caché fait 6 charactères en débuggant avec gdb.  
-On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 6 charactères (jump not below).  
+On peut voir que le mot de passe caché fait 7 charactères en débuggant avec gdb.  
+On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 7 charactères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-7.png)
 
-Si l'entrée utilisateur fait au moins 6 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
+Si l'entrée utilisateur fait au moins 7 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
 
 ![exemple](./img/4-4.png)
 
@@ -195,13 +199,13 @@ S'ils ne sont pas sont égaux (code ASCII différent), le bloc suivant affichera
 S'ils sont égaux (même code ASCII), on revient au début de la boucle.
 
 On comprends maintenant que le mot de passe à trouver corresponds à une chaîne de 7 caractères dont chaque caractère corresponds au xor de 187 des charactères suivants :
-0DF
-0DE
-0D9
-0CE
-0DC
-0D6
-88
+0DF  
+0DE  
+0D9  
+0CE  
+0DC  
+0D6  
+88  
 
 On peut faire un simple script en Python qui effectue le calcul puis affiche le mot de passe :
 
@@ -353,4 +357,90 @@ Pour terminer dans tout les cas de figure nous passons par ce bloc qui est la fi
 
 ![level_6_a](./img/lev_6_j.png)
 
-Le script lancer nous trouvons le flag qui est : **L1gH7s** 
+
+Le script lancer nous trouvons le flag qui est : **L1gH7s**
+
+# Level 7
+
+Le niveau 7 nous demande d'entrer un nombre.
+
+![level_7_1](./img/7-0.png)
+
+Contrairement aux autres niveaux, il n'est pas possible de visualiser le diagramme de blocs avec IDA.  
+Ainsi, nous allons suivre les instructions directement dans le mode linéaire de IDA.  
+
+![level_7_1](./img/7-1.png)
+
+Le premier bloc récupère l'entrée utilisateur et la stocke en mémoire.  
+
+On passe ensuite au second bloc "début" qui appelle la fonction atoi pour convertir l'entrée utilisateur en un int.  
+On récupère le résultat de eax pour le stocker à l'adresse ebp-0Ch.  
+Le résultat est aussi poussé dans la pile, mais un xor sur eax avec lui-même est effectué ce qui a comme conséquence de mettre la valeur 0 dans eax (quelque soit sa valeur précédente car un xor d'un nombre avec lui-même renverra toujours 0).  
+
+On peut voir qu'un jump if zero suit ce xor.  
+Nous avons déduit que eax aurait toujours la valeur 0 après le xor, on peut donc en déduire que toutes les instructions du bloc suivant ce jump if zero ne seront jamais atteintes.  
+
+On saute donc à l'étiquette loc_8048CAC+1 soit loc_8048CAD.  
+IDA n'affiche pas le bloc à cette adresse, mais on peut voir dans gdb que l'instruction effectuée à cette adresse est un pop de eax.  
+La dernière valeur poussée dans la stack étant l'entrée utilisateur au format int, on insérera celle-ci dans le registre eax.  
+
+![level_7_2](./img/7-2.png)
+
+Le prochain bloc d'une seule ligne d'est jamais atteint.  
+
+![level_7_3](./img/7-3.png)
+
+Ensuite, on récupère l'entrée utilisateur au format int en mémoire et on la place dans eax.
+
+![level_7_4](./img/7-4.png)
+
+Le bloc suivant va effectuer l'opération shift arithmetic right qui décale de n bits vers la droite la valeur du registre passé en paramètre.  
+Par exemple, si eax contient le nombre 255, ou 1111 1111 en binaire, l'opération "sar eax, 3" décalera les bits 3 fois vers la droite.  
+Le résultat est alors le nombre 31, ou 0001 1111 en binaire.  Le résultat écrase la précédente valeur du registre, ici eax.  
+On compare ensuite eax à 4919.  
+Si c'est égal, le bloc suivant affichera un message de succès (couleur verte) puis quittera la fonction level_7 :
+
+![level_7_win](./img/7-win.png)
+
+Sinon, un autre xor est fait pour passer eax à 0 puis un jump if zero est effectué (dans tous les cas car eax sera toujours à 0).  
+On peut déduire de ce saut que toutes les autres instructions du bloc ne sont pas atteignables.  
+On saute alors au bloc suivant qui affichera un message d'erreur (couleur rouge) puis quittera la fonction level_7 :
+
+![level_7_fail](./img/7-fail.png)
+
+On peut aussi noter qu'un bloc inateignable est aussi présent :
+
+![level_7_5](./img/7-5.png)
+
+Suites à ces observations, on peut en déduire que le nombre demandé doit-être égal à 4919 après avoir été shifté de 3 bits vers la droite.  
+On peut faire un simple script en Python qui commence avec le nombre 4919 shifté de 3 bits vers la gauche.  
+Le script incrémentera de 1 le nombre jusqu'à ce que le 4ème bit en partant de la droite soit changé (cette valeur sera excluse).  
+
+```python
+target = 4919
+binary_target_start = bin(4919 << 3)
+
+done = False
+current_target = int(binary_target_start, 2)
+flags = [current_target]
+
+while not done:
+    flags.append(current_target + 1)
+    current_target += 1
+    # checks if the next binary number 4th bit changes
+    if bin(current_target + 1)[2:][-4] == str(0):
+        done = True
+
+print "Valid flags are:"
+for flag in flags:
+    print flag
+```
+On trouve alors les flags suivants :  
+**39352  
+39353  
+39354  
+39355  
+39356  
+39357  
+39358  
+39359**  
