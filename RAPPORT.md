@@ -251,7 +251,7 @@ Le niveau 7 nous demande d'entrer un nombre.
 ![level_7_1](./img/7-0.png)
 
 Contrairement aux autres niveaux, il n'est pas possible de visualiser le diagramme de blocs avec IDA.  
-Ainsi, nous allons suivre les instructions directement dans la mémoire.  
+Ainsi, nous allons suivre les instructions directement dans le mode linéaire de IDA.  
 
 ![level_7_1](./img/7-1.png)
 
