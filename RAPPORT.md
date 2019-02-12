@@ -257,8 +257,6 @@ Ainsi, nous allons suivre les instructions directement dans la mémoire.
 
 Le premier bloc récupère l'entrée utilisateur et la stocke à l'adresse ebp+8.  
 
-![level_7_2](./img/7-2.png)
-
 On passe ensuite au second bloc "début" qui appelle la fonction atoi pour convertir l'entrée utilisateur en un int.  
 On récupère le résultat de eax pour le stocker à l'adresse ebp-0Ch.  
 Le résultat est aussi poussé dans la pile, mais un xor sur eax avec lui-même est effectué ce qui a comme conséquence de mettre la valeur 0 dans eax (quelque soit sa valeur précédente car un xor d'un nombre avec lui-même renverra toujours 0).  
@@ -270,14 +268,34 @@ On saute donc à l'étiquette loc_8048CAC+1 soit loc_8048CAD.
 IDA n'affiche pas le bloc à cette adresse, mais on peut voir dans gdb que l'instruction effectuée à cette adresse est un pop de eax.  
 La dernière valeur poussée dans la stack étant l'entrée utilisateur au format int, on insérera celle-ci dans le registre eax.  
 
+![level_7_2](./img/7-2.png)
+
+Le prochain bloc d'une seule ligne d'est jamais atteint.  
+
 ![level_7_3](./img/7-3.png)
+
+Ensuite, on récupère l'entrée utilisateur au format int en mémoire et on la place dans eax.
 
 ![level_7_4](./img/7-4.png)
 
-![level_7_5](./img/7-5.png)
+Le bloc suivant va effectuer l'opération shift arithmetic right qui décale de n bits vers la droite la valeur du registre passé en paramètre.  
+Par exemple, si eax contient le nombre 255, ou 1111 1111 en binaire, l'opération "sar eax, 3" décalera les bits 3 fois vers la droite.  
+Le résultat est alors le nombre 31, ou 0001 1111 en binaire.  Le résultat écrase la précédente valeur du registre, ici eax.  
+On compare ensuite eax à 4919.  
+Si c'est égal, le bloc suivant affichera un message de succès (couleur verte) puis quittera la fonction level_7 :
+
+![level_7_win](./img/7-win.png)
+
+Sinon, un autre xor est fait pour passer eax à 0 puis un jump if zero est effectué (dans tous les cas car eax sera toujours à 0).  
+On peut déduire de ce saut que toutes les autres instructions du bloc ne sont pas atteignables.  
+On saute alors au bloc suivant qui affichera un message d'erreur (couleur rouge) puis quittera la fonction level_7 :
 
 ![level_7_fail](./img/7-fail.png)
 
-![level_7_win](./img/7-win.png)
+On peut aussi noter qu'un bloc inateignable est aussi présent :
+
+![level_7_5](./img/7-5.png)
+
+
 
 
