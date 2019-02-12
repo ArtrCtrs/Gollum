@@ -164,12 +164,12 @@ Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc 
 Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
 On stocke la longeur de l'entrée utilisateur dans ebx, puis la longeur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
 On peut voir que le mot de passe caché fait 7 charactères en débuggant avec gdb.  
-On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 6 charactères (jump not below).  
+On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 7 charactères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-7.png)
 
-Si l'entrée utilisateur fait au moins 6 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
+Si l'entrée utilisateur fait au moins 7 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
 
 ![exemple](./img/4-4.png)
 
