@@ -243,3 +243,25 @@ On trouve alors le mot de passe en clair : **debugm3**
 ![level_6_a](./img/lev_6_i.png)
 
 ![level_6_a](./img/lev_6_j.png)
+
+# Level 7
+
+Le niveau 7 nous demande d'entrer un nombre.
+
+![level_7_1](./img/7-0.png)
+
+![level_7_1](./img/7-1.png)
+
+![level_7_2](./img/7-2.png)
+
+![level_7_3](./img/7-3.png)
+
+![level_7_4](./img/7-4.png)
+
+![level_7_5](./img/7-5.png)
+
+![level_7_fail](./img/7-fail.png)
+
+![level_7_win](./img/7-win.png)
+
+
