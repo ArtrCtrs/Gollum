@@ -222,6 +222,29 @@ print password
 
 On trouve alors le mot de passe en clair : **debugm3**
 
+# Level 5
+
+![level_5](./img/lvl_5_a.png)
+
+![level_5](./img/lvl_5_b.png)
+
+![level_5](./img/lvl_5_c.png)
+
+![level_5](./img/lvl_5_d.png)
+
+![level_5](./img/lvl_5_e.png)
+
+![level_5](./img/lvl_5_f.png)
+
+![level_5](./img/lvl_5_g.png)
+
+![level_5](./img/lvl_5_h.png)
+
+![level_5](./img/lvl_5_i.png)
+
+
+On trouve donc le flag : **R1Ng**
+
 # Level 6
 
 ![level_6_a](./img/lev_6_0.png)
