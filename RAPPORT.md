@@ -296,6 +296,37 @@ On peut aussi noter qu'un bloc inateignable est aussi présent :
 
 ![level_7_5](./img/7-5.png)
 
+Suites à ces observations, on peut en déduire que le nombre demandé doit-être égal à 4919 après avoir été shifté de 3 bits vers la droite.  
+On peut faire un simple script en Python qui commence avec le nombre 4919 shifté de 3 bits vers la gauche.  
+Le script incrémentera de 1 le nombre jusqu'à ce que le 4ème bit en partant de la droite soit changé (cette valeur sera excluse).  
 
+```python
+target = 4919
+binary_target_start = bin(4919 << 3)
+
+done = False
+current_target = int(binary_target_start, 2)
+flags = [current_target]
+
+while not done:
+    flags.append(current_target + 1)
+    current_target += 1
+    # checks if the next binary number 4th bit changes
+    if bin(current_target + 1)[2:][-4] == str(0):
+        done = True
+
+print "Valid flags are:"
+for flag in flags:
+    print flag
+```
+On trouve alors les flags suivants :  
+39352  
+39353  
+39354  
+39355  
+39356  
+39357  
+39358  
+39359  
 
 
