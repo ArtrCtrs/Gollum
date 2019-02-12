@@ -255,7 +255,7 @@ Ainsi, nous allons suivre les instructions directement dans le mode linéaire de
 
 ![level_7_1](./img/7-1.png)
 
-Le premier bloc récupère l'entrée utilisateur et la stocke à l'adresse ebp+8.  
+Le premier bloc récupère l'entrée utilisateur et la stocke en mémoire.  
 
 On passe ensuite au second bloc "début" qui appelle la fonction atoi pour convertir l'entrée utilisateur en un int.  
 On récupère le résultat de eax pour le stocker à l'adresse ebp-0Ch.  
