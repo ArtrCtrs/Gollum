@@ -247,9 +247,10 @@ Dans le cas contraire, cela appelle la fonction level_5_checkpassword avec la sa
 Ensuite, si la fonction renvoie une réponse différente de zéro, le programme va afficher le message de succès.
 Puis nous passons au bloc de fin de fonction.
 
-Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.
+Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.  
 
 ![level_5](./img/5_check_1.png)
+  
 Nous pouvons résumer cette partie par l'équation ci-dessous
 
 ![level_5](./img/lvl5_a.png)
