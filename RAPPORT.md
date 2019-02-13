@@ -136,7 +136,7 @@ L’instruction cmp s’effectue entre la valeur de al, qui est les 8 bits les p
 
 ![exemple](./img/3-8.png)
 
-Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on n’arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve S m e a g o l.
+Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on n’arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve le flag **Smeagol**.
 
 ![exemple](./img/3-9.png)
 
