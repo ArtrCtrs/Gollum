@@ -1,6 +1,6 @@
 # Gollum
- 
-> - Arthur CATRISSE 
+
+> - Arthur CATRISSE
 > - Kaan DAGERI
 > - Hugo DALBOUSSIERE
 
@@ -104,7 +104,6 @@ On trouve alors le mot de passe en clair : **cavefishandgoblin**
 En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
 
 ![exemple](./img/3-0.png)
-![exemple](./img/3-1.png)
 
 Une fois dans IDA, après avoir remarqué que le schéma représentant le code de lvl_3 était très étendu en largeur, nous avons choisi d’analyser en premier les blocs du bas. Il y a 2 blocs vers lesquels arrivent tous les autres.
 Sur celui-ci, qui est situé au milieu en bas, on constate un return avec l’instruction « retn ». C’est donc le bloc qui terminera le programme. On renomme ce bloc en « end : ».
@@ -250,7 +249,7 @@ Puis nous passons au bloc de fin de fonction.
 Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.  
 
 ![level_5](./img/5_check_1.png)
-  
+
 Nous pouvons résumer cette partie par l'équation ci-dessous
 
 ![level_5](./img/lvl5_a.png)
@@ -269,7 +268,7 @@ Ce bloc, simple mais essentiel à la résolution de ce challenge, nous permet de
 
 ![level_5](./img/5_check-3.png)
 
-Ci-dessous l'équation associée : 
+Ci-dessous l'équation associée :
 
 ![level_5](./img/lvl5_c.png)
 
@@ -530,4 +529,3 @@ On trouve alors les flags suivants :
 39357  
 39358  
 39359**  
-
