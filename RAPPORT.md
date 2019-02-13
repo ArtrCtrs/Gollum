@@ -324,7 +324,7 @@ Ensuite nous récupérons la taille réelle (sans retour chariot) et nous la met
 
 ![level_6_a](./img/lev_6_c.png)
 
-Cette partie du code peut paraitre au premier abord compliqué mais nous allons voir que la compréhension de cette partie est essentielle dans la résolution de l'exercice.
+Cette partie du code peut paraitre au premier abord compliquée mais nous allons voir que la compréhension de cette partie est essentielle dans la résolution de l'exercice.
 
 En premier lieu, une opération `stosd` : cette opération peut s’apparenter à la fonction `memset` en C.
 
@@ -338,11 +338,11 @@ Pour terminer il y a une vérification de la taille de la chaine saisie par l'ut
 
 **Premier indice :** la taille de la chaine est de 6
 
-Dans le cas actuel des choses nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons brute force facilement ce challenge en moins de 10 secondes. Mais pour le plaisir nous allons continuer notre analyse.
+Dans le cas actuel des choses nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons bruteforcer facilement ce challenge en un temps restreint. Mais pour le plaisir nous allons continuer notre analyse.
 
 ![level_6_a](./img/lev_6_d.png)
 
-Ensuite nous pouvons voir que nous entrons dans une boucle, en paramètre un compteur et une condition de sortie qui est la taille de la chaine.
+Ensuite, nous pouvons voir que nous entrons dans une boucle, en paramètre un compteur et une condition de sortie qui est la taille de la chaine.
 
 ![level_6_a](./img/lev_6_e.png)
 
@@ -365,7 +365,7 @@ var_D4[(char/16 + cmpt*16) * 2] == 1
 
 ![level_6_a](./img/lev_6_f.png)
 
-Dans ce bloc nous effectuons un second test sur la chaine entrer par l'utilisateur. Ce test n'est pas effectué si l'on ne passe par la condition précédente.
+Dans ce bloc nous effectuons un second test sur la chaine entrée par l'utilisateur. Ce test n'est pas effectué si l'on ne passe par la condition précédente.
 
 Le second test est similaire au premier sauf que cette fois on vérifie dans le second buffer en utilisant caracter_anded.
 
@@ -440,7 +440,7 @@ print res
 
 ![level_6_a](./img/lev_6_i.png)
 
-Dans tous les cas, pour terminer nous passons par ce bloc qui est la fin de la fonction
+Dans tous les cas, pour terminer, nous passons par ce bloc qui est la fin de la fonction
 
 ![level_6_a](./img/lev_6_j.png)
 
