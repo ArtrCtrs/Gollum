@@ -308,19 +308,19 @@ On trouve donc le flag : **R1Ng**
 
 # Level 6
 
-![level_6_a](./img/lev_6_0.png)
+![level_6_a](./img/6-0.png)
 
 Admettons tout d'abord que nous ne connaissons pas Lord of the Rings sinon l'exercice sera moins drôle.
 
-![level_6_a](./img/lev_6_a.png)
+![level_6_a](./img/6-1.png)
 
 Tout d’abord ce morceau permet de remplacer le retour chariot (\n) par le caractère fin de chaine appelé null (\0).
 
-![level_6_a](./img/lev_6_b.png)
+![level_6_a](./img/6-2.png)
 
 Ensuite nous récupérons la taille réelle (sans retour chariot) et nous la mettons dans la variable user_string_len.
 
-![level_6_a](./img/lev_6_c.png)
+![level_6_a](./img/6-3.png)
 
 Cette partie du code peut paraitre au premier abord compliquée mais nous allons voir que la compréhension de cette partie est essentielle dans la résolution de l'exercice.
 
@@ -338,11 +338,11 @@ Pour terminer il y a une vérification de la taille de la chaine saisie par l'ut
 
 Dans le cas actuel des choses nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons bruteforcer facilement ce challenge en un temps restreint. Mais pour le plaisir nous allons continuer notre analyse.
 
-![level_6_a](./img/lev_6_d.png)
+![level_6_a](./img/6-4.png)
 
 Ensuite, nous pouvons voir que nous entrons dans une boucle, en paramètre un compteur et une condition de sortie qui est la taille de la chaine.
 
-![level_6_a](./img/lev_6_e.png)
+![level_6_a](./img/6-5.png)
 
 Dans ce bloc nous parcourons la chaine de caractères en se déplaçant à l'aide du compteur afin de le mettre dans une variable que nous appellerons ici caractere_brut.
 
@@ -361,7 +361,7 @@ Ensuite nous allons chercher dans le buffer 1 (var_D4 memset) à l'adresse [ebp+
 En résumé pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
 var_D4[(char/16 + cmpt*16) * 2] == 1
 
-![level_6_a](./img/lev_6_f.png)
+![level_6_a](./img/6-6.png)
 
 Dans ce bloc nous effectuons un second test sur la chaine entrée par l'utilisateur. Ce test n'est pas effectué si l'on ne passe par la condition précédente.
 
@@ -370,7 +370,7 @@ Le second test est similaire au premier sauf que cette fois on vérifie dans le 
 En résumé, pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
 var_254[()(char & 15) + (cmpt*16)) * 4] == 1
 
-![level_6_a](./img/lev_6_g.png)
+![level_6_a](./img/6-7.png)
 
 Le second test passé, on incrémente le compteur afin de vérifier le caractère suivant.
 
@@ -398,7 +398,7 @@ for i in range (0,6):
 print res
 ```
 
-![level_6_a](./img/lev_6_h.png)
+![level_6_a](./img/6-8.png)
 
 Une fois que les 6 caractères passent les deux conditions nous sortons de la boucle pour arriver au bloc affichant le message de succès et aussi la "répose" du moins un gros indice permettant de déterminer le flag.
 
@@ -436,11 +436,11 @@ for i in range (0,6):
 print res
 ```
 
-![level_6_a](./img/lev_6_i.png)
+![level_6_a](./img/6-9.png)
 
 Dans tous les cas, pour terminer, nous passons par ce bloc qui est la fin de la fonction
 
-![level_6_a](./img/lev_6_j.png)
+![level_6_a](./img/6-9.png)
 
 
 Le script lancé, nous trouvons le flag qui est : **L1gH7s**
