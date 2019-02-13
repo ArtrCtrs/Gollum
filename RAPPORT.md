@@ -1,8 +1,8 @@
 # Gollum
-
-> * CATRISSE Arthur
-> * DAGERI Kaan
-> * DALBOUSSIERE Hugo
+ 
+> - Arthur CATRISSE 
+> - Kaan DAGERI
+> - Hugo DALBOUSSIERE
 
 # Level 1
 
@@ -226,9 +226,18 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 5
 
+Meme sans connaitre lord of the RING nous pouvons déduire le flag, le flag sera probablement 'RING' mais surrement un leetspeak équivalent.
+
+Si je décidé de brut force ce chalenge étant donné la taille probable de la chaine ce serais un jeu d'enfant mais continuons d'analysé le code sinon cela ne serais pas fun.
+
 ![level_5](./img/5_a.png)
 
+Ce premier bloque la chaine entrée en paramètre est récupéré et le \n est remplacé par un \0 d'une part et ensuite il y a une verification de la taille de la chaine entré par l'utilisateur.
+
+Cela valide notre hypothèse sur le flag 'RING'.
+
 ![level_5](./img/5_b.png)
+
 
 ![level_5](./img/5_c.png)
 
