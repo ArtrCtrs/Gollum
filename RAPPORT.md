@@ -14,19 +14,19 @@ Etudions le premier bloc.
 
 ![exemple](./img/1-0.png)
 
-On push l'entrée utilisateur dans la stack afin d'appeller la fonction atoi.  
-Cette fonction convertis la string en un int.
+On push l'entrée utilisateur dans la stack afin d'appeler la fonction atoi.  
+Cette fonction convertie la string en un int.
 On récupère le résultat de eax et on le déplace dans l'adresse ebp+var_C puis on compare cette valeur à 501337h ou encore 5247799 en décimal.  
-Si cela ne corresponds pas (jump if not zero) on saute vers le bloc suivant qui affichera un message d'erreur puis quittera la fonction level_1 :
+Si cela ne correspond pas (jump if not zero) on saute vers le bloc suivant qui affichera un message d'erreur puis quittera la fonction level_1 :
 
 ![exemple](./img/1-1.png)
 
-Sinon, l'entrée utilisateur corresponds (le zero flag est à 1) et l'on saute sur le bloc suivant qui affiche un message de succès en vert :
+Sinon, l'entrée utilisateur correspond (le zero flag est à 1) et l'on saute sur le bloc suivant qui affiche un message de succès en vert :
 
 ![exemple](./img/1-2.png)
 
-On mets aussi 1 dans eax pour indiquer la bonne terminaison de la fonction.  
-Enfin, on arrive au dernier bloc qui ne fait que retourner à la fonction appellante.  
+On met aussi 1 dans eax pour indiquer la bonne terminaison de la fonction.  
+Enfin, on arrive au dernier bloc qui ne fait que retourner à la fonction appelante.  
 
 ![exemple](./img/1-3.png)
 
@@ -64,7 +64,7 @@ Cette boucle déplace les pointeurs des chaînes de caractères user_input et lo
 counter_1 s'incrémentant toujours de 1, le pointeur de user_input se déplacera de 1 charactère.  
 counter_2 s'incrémentant toujours de 5, le pointeur de long_text se déplacera de 5 charactères.  
 Attention, il faut prendre en compte que counter_2 a été initialisé à la valeur 256.  
-Enfin, on récupères les premiers charactères de user_input et de long_text puis on les compare pour voir s'ils sont identiques.  
+Enfin, on récupère les premiers charactères de user_input et de long_text puis on les compare pour voir s'ils sont identiques.  
 
 S'ils ne sont pas identiques, le bloc suivant affichera un message d'erreur en rouge puis quittera la fonction level_2 :  
 
@@ -116,6 +116,7 @@ Sur le deuxième bloc situé en bas (à gauche), la seule instruction effectuée
 ![exemple](./img/3-4.PNG)
 
 En remontant les blocs d’un niveau vers le haut, on différentie 2 types de blocs. Les premiers affichent un message, en appelant la fonction cprintf. Le message est stocké en tant que chaine de caractères grâce à « db ». Parmi les messages qui existent, on retrouve les 2 sur lesquels on était tombés en testant le programme. Après avoir affiché le message, le bloc d’instructions effectue un jump au bloc que nous avons renommé « end » pour terminer le process. Le deuxième type de bloc ne fait rien mis à part un jmp au bloc que nous avons renommé « increment ».
+
 On va maintenant remonter en haut des blocs.
 Le bloc tout en haut est celui qui est appelé lorsqu’on choisit le niveau 3. On sait que c’est dans ce bloc que le code teste la présence ou l’absence de lettres entrées par l’utilisateur, puisque le jump conditionnel peut aller directement au bloc de message d’erreur que l’on reçoit lorsqu’on ne rentre aucun caractère avant de valider.
 Dans le cas où des caractères sont rentrés, on tombe sur un petit bloc d’instructions qui initialise à 0 la valeur de [ebp+incremental] grâce à l’instruction mov.
@@ -135,7 +136,7 @@ L’instruction cmp s’effectue entre la valeur de al, qui est les 8 bits les p
 
 ![exemple](./img/3-9.PNG)
 
-Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve S m e a g o l.
+Lorsqu’on teste cette première lettre dans le programme, le message d’erreur change. On nous indique maintenant que l’on n’arrive pas à trouver la lettre à la position 1 (et non plus à la position 0). C’est donc la bonne technique. On convertissant les 6 autres nombres hexadécimaux des autres blocks du switch en ascii, on trouve S m e a g o l.
 
 ![exemple](./img/3-10.PNG)
 
@@ -143,7 +144,7 @@ Lorsqu’on teste cette première lettre dans le programme, le message d’erreu
 
 ![exemple](./img/4-0.png)
 
-On peut aperçevoir que le programme nous demande un mot de passe dans le quatrième niveau.
+On peut apercevoir que le programme nous demande un mot de passe dans le quatrième niveau.
 
 ![exemple](./img/4-1.png)
 
@@ -163,7 +164,7 @@ Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc 
 ![exemple](./img/4-3.png)
 
 Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
-On stocke la longeur de l'entrée utilisateur dans ebx, puis la longeur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
+On stocke la longueur de l'entrée utilisateur dans ebx, puis la longueur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
 On peut voir que le mot de passe caché fait 7 charactères en débuggant avec gdb.  
 On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 7 charactères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
@@ -179,7 +180,7 @@ On saute directement au prochain bloc.
 ![exemple](./img/4-5.png)
 
 On arrive à l'entrée d'une boucle.  
-C'est là que le code devient intéréssant.  
+C'est là que le code devient intéressant.  
 Ce bloc déplace la string contenue à l'adresse ebp+var_C dans eax puis regarde si son premier caractère n'est pas nul.
 Si le caractère est nul, le bloc suivant affichera un message de succès (couleur verte) puis quittera la fonction level_4 :
 
@@ -193,13 +194,13 @@ Une fois ces deux charactères stockés, on les compare.
 
 ![exemple](./img/4-6.png)
 
-S'ils ne sont pas sont égaux (code ASCII différent), le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :
+S'ils ne sont pas égaux (code ASCII différent), le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :
 
 ![exemple](./img/4-8.png)
 
 S'ils sont égaux (même code ASCII), on revient au début de la boucle.
 
-On comprends maintenant que le mot de passe à trouver corresponds à une chaîne de 7 caractères dont chaque caractère corresponds au xor de 187 des charactères suivants :
+On comprend maintenant que le mot de passe à trouver correspond à une chaîne de 7 caractères dont chaque caractère correspond au xor de 187 des charactères suivants :
 0DF  
 0DE  
 0D9  
@@ -276,32 +277,32 @@ On trouve donc le flag : **R1Ng**
 
 ![level_6_a](./img/lev_6_0.png)
 
-Admetons tout d'abors que nous ne connaissons pas lord of the ring sinon l'exercice sera moins drôle.
+Admettons tout d'abord que nous ne connaissons pas Lord of the Rings sinon l'exercice sera moins drôle.
 
 ![level_6_a](./img/lev_6_a.png)
 
-Tout dabors ce morceaux permet de remplacer le retour chariot (\n) par le charactere fin de chaine appele null (\0).
+Tout d’abord ce morceau permet de remplacer le retour chariot (\n) par le caractère fin de chaine appelé null (\0).
 
 ![level_6_a](./img/lev_6_b.png)
 
-Ensuite nous récupérons ma taille réel (sans retour chariot) et nous la mettons dans la variable user_string_len.
+Ensuite nous récupérons la taille réelle (sans retour chariot) et nous la mettons dans la variable user_string_len.
 
 ![level_6_a](./img/lev_6_c.png)
 
-Cette partie du code peut paraire au premier abord compliqué mais nous allons voir que la compréhension de cette partie est essenciel dans la résolution de l'exercice.
+Cette partie du code peut paraitre au premier abord compliqué mais nous allons voir que la compréhension de cette partie est essentielle dans la résolution de l'exercice.
 
-Tout d'abord nous une opération `stosd`, cette opération peut d'apparenta à la fonction `memset` en C.
-En prenant les paramètre edi, ecx et edx en compte nous avons `memset(var_D4, 0, 48)` pour le premier buffer (partant de var_D4).
+En premier lieu, une opération `stosd` : cette opération peut s’apparenter à la fonction `memset` en C.
+En prenant les paramètres edi, ecx et edx en compte nous avons `memset(var_D4, 0, 48)` pour le premier buffer (partant de var_D4).
 Il en est de même pour le second buffer partant de var_254 `memset(var_254, 0, 96)`
 Dans les deux cas nous avons après chaque opération stosd une suite de 6 effectations pour chaque buffer.
 
-Pour faire simple nous initialison deux buffer à 0 l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
+Pour faire simple nous initialisons deux buffer à 0, l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
 
-Pour terminer il y a une verification de la taille de la chaine saisie par l'utilisateur.
+Pour terminer il y a une vérification de la taille de la chaine saisie par l'utilisateur.
 
-Première indice : la taille de la chaine est de 6
+Premier indice : la taille de la chaine est de 6
 
-Dans le cas actuelle des choses nous avons $256^6$ possibilité. Avec les processeur actuelle nous pouvons brute force facillement ce challenge en moins de 10 seconde. Mais pour le plaisir nous allons continué notre analyse.
+Dans le cas actuel des choses nous avons $256^6$ possibilités. Avec les processeurs actuels nous pouvons brute force facilement ce challenge en moins de 10 secondes. Mais pour le plaisir nous allons continuer notre analyse.
 
 ![level_6_a](./img/lev_6_d.png)
 
@@ -309,35 +310,35 @@ Ensuite nous pouvons voir que nous entrons dans une boucle, en paramètre un com
 
 ![level_6_a](./img/lev_6_e.png)
 
-Dans ce bloc nous parcourons la chaine de charactere en ce déplacent à l'aide du compteur afin de le mettre dans une variable que nous appelerons ici caractere_brut.
+Dans ce bloc nous parcourons la chaine de caractères en se déplaçant à l'aide du compteur afin de le mettre dans une variable que nous appellerons ici caractere_brut.
 
-Ensuite nous appliquons une opération de shift right de 4 sur le caractere_brut ce qui revient à diviser par 16 la valeur décimale corresponds au caractère dans la table ASCII.
+Ensuite nous appliquons une opération de shift right de 4 sur le caractere_brut ce qui revient à diviser par 16 la valeur décimale correspondant au caractère dans la table ASCII.
 
-Cette valeur est stocké dans une variable que nous appelerons caractere_shifted.
+Cette valeur est stockée dans une variable que nous appellerons caractere_shifted.
 
-En suite nous reprenons le caractere_brut afin d'y appliquer une opération ET logique avec la valeur 15 et on la stock sur la variable caractere_anded.
+Ensuite nous reprenons le caractere_brut afin d'y appliquer une opération ET logique avec la valeur 15 et on la stocke dans la variable caractere_anded.
 
-Puis nous recupérons le caractere_shifted dans eax et le compteur dans edx que nous multiplions par 16 suite à une opération de shift left par 4.
+Puis nous récupérons le caractere_shifted dans eax et le compteur dans edx que nous multiplions par 16 suite à une opération de shift left par 4.
 
-après cela nous faison la somme (caractere_shifted + cmp * 4)
+Après cela nous effectuons la somme (caractere_shifted + cmp * 4)
 
-Ensuite nous allons chercher dans le buffer 1 (var_D4 memset) à l'adress [ebp+eax*2+var_4] afin de verifier si nous tombons sur un 0 ou un 1, si la valeur est un 1 cela veux dire que le caractere courant passe la premiere condition, dans le cas contraire ou l'on tombe sur un zero on jump vers le message d'erreur.
+Ensuite nous allons chercher dans le buffer 1 (var_D4 memset) à l'adresse [ebp+eax*2+var_4] afin de vérifier si nous tombons sur un 0 ou un 1, si la valeur est un 1 cela veut dire que le caractère courant passe la première condition, dans le cas contraire ou l'on tombe sur un zero on jump vers le message d'erreur.
 
-En résumé pour passer la condition de ce bloque il faut que le caractere courant passe la condition suivante :
+En résumé pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
 var_D4[(char/16 + cmpt*16) * 2] == 1
 
 ![level_6_a](./img/lev_6_f.png)
 
-Dans ce bloque nous effectuons un second test sur la chaine entrer par l'utilisateur. Ce test n'ai pas effectué si l'on ne passe par la condition précédente.
+Dans ce bloc nous effectuons un second test sur la chaine entrer par l'utilisateur. Ce test n'est pas effectué si l'on ne passe par la condition précédente.
 
-Le second teste est similaire au premier sauf que cette fois on vérifie dans le second buffer en utilise caracter_anded.
+Le second test est similaire au premier sauf que cette fois on vérifie dans le second buffer en utilisant caracter_anded.
 
-En résumé pour passer la condition de ce bloque il faut que le caractere courant passe la condition suivante :
+En résumé, pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
 var_254[()(char & 15) + (cmpt*16)) * 4] == 1
 
 ![level_6_a](./img/lev_6_g.png)
 
-Le second teste passer on increment le compteur afin de vérifier le caractère suivant.
+Le second test passé, on incrémente le compteur afin de vérifier le caractère suivant.
 
 A ce stade afin de récupérer le flag nous pourrions utiliser le script suivant :
 
@@ -365,9 +366,9 @@ print res
 
 ![level_6_a](./img/lev_6_h.png)
 
-Une fois que les 6 caracteres passe les deux conditions nous sortont de la boucle pour arriver au bloque affichant le message de succès et aussi la "répose" du moins un gros indice permetant de determiner le flag.
+Une fois que les 6 caractères passent les deux conditions nous sortons de la boucle pour arriver au bloc affichant le message de succès et aussi la "répose" du moins un gros indice permettant de déterminer le flag.
 
-En prenant en compte cette indice nous pouvons améliorer notre script est passer à celui ci dessous :
+En prenant en compte cet indice nous pouvons améliorer notre script et passer à celui ci-dessous :
 
 ```python
 #!/usr/bin/python
@@ -403,12 +404,12 @@ print res
 
 ![level_6_a](./img/lev_6_i.png)
 
-Pour terminer dans tout les cas de figure nous passons par ce bloc qui est la fin de la fonction
+Dans tous les cas, pour terminer nous passons par ce bloc qui est la fin de la fonction
 
 ![level_6_a](./img/lev_6_j.png)
 
 
-Le script lancer nous trouvons le flag qui est : **L1gH7s**
+Le script lancé, nous trouvons le flag qui est : **L1gH7s**
 
 # Level 7
 
@@ -425,7 +426,7 @@ Le premier bloc récupère l'entrée utilisateur et la stocke en mémoire.
 
 On passe ensuite au second bloc "début" qui appelle la fonction atoi pour convertir l'entrée utilisateur en un int.  
 On récupère le résultat de eax pour le stocker à l'adresse ebp-0Ch.  
-Le résultat est aussi poussé dans la pile, mais un xor sur eax avec lui-même est effectué ce qui a comme conséquence de mettre la valeur 0 dans eax (quelque soit sa valeur précédente car un xor d'un nombre avec lui-même renverra toujours 0).  
+Le résultat est aussi poussé dans la pile, mais un xor sur eax avec lui-même est effectué ce qui a comme conséquence de mettre la valeur 0 dans eax (quel que soit sa valeur précédente car un xor d'un nombre avec lui-même renverra toujours 0).  
 
 On peut voir qu'un jump if zero suit ce xor.  
 Nous avons déduit que eax aurait toujours la valeur 0 après le xor, on peut donc en déduire que toutes les instructions du bloc suivant ce jump if zero ne seront jamais atteintes.  
@@ -436,7 +437,7 @@ La dernière valeur poussée dans la stack étant l'entrée utilisateur au forma
 
 ![level_7_2](./img/7-2.png)
 
-Le prochain bloc d'une seule ligne d'est jamais atteint.  
+Le prochain bloc d'une seule ligne n'est jamais atteint.  
 
 ![level_7_3](./img/7-3.png)
 
@@ -458,13 +459,13 @@ On saute alors au bloc suivant qui affichera un message d'erreur (couleur rouge)
 
 ![level_7_fail](./img/7-fail.png)
 
-On peut aussi noter qu'un bloc inateignable est aussi présent :
+On peut aussi noter qu'un bloc inatteignable est aussi présent :
 
 ![level_7_5](./img/7-5.png)
 
-Suites à ces observations, on peut en déduire que le nombre demandé doit-être égal à 4919 après avoir été shifté de 3 bits vers la droite.  
+Suite à ces observations, on peut en déduire que le nombre demandé doit être égal à 4919 après avoir été shifté de 3 bits vers la droite.  
 On peut faire un simple script en Python qui commence avec le nombre 4919 shifté de 3 bits vers la gauche.  
-Le script incrémentera de 1 le nombre jusqu'à ce que le 4ème bit en partant de la droite soit changé (cette valeur sera excluse).  
+Le script incrémentera de 1 le nombre jusqu'à ce que le 4ème bit en partant de la droite soit changé (cette valeur sera exclue).  
 
 ```python
 #!/usr/bin/python
@@ -495,3 +496,4 @@ On trouve alors les flags suivants :
 39357  
 39358  
 39359**  
+
