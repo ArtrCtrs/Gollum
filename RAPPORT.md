@@ -1,6 +1,6 @@
 # Gollum
-
-> - Arthur CATRISSE
+ 
+> - Arthur CATRISSE 
 > - Kaan DAGERI
 > - Hugo DALBOUSSIERE
 
@@ -15,7 +15,7 @@ Etudions le premier bloc.
 ![exemple](./img/1-0.png)
 
 On push l'entrée utilisateur dans la stack afin d'appeler la fonction atoi.  
-Cette fonction convertie la string en un int.
+Cette fonction convertit la string en un int.
 On récupère le résultat de eax et on le déplace dans l'adresse ebp+var_C puis on compare cette valeur à 501337h ou encore 5247799 en décimal.  
 Si cela ne correspond pas (jump if not zero) on saute vers le bloc suivant qui affichera un message d'erreur puis quittera la fonction level_1 :
 
@@ -97,13 +97,14 @@ while not done:
 
 print "The flag is " + flag
 ```
-On trouve alors le mot de passe en clair : **cavefishandgoblin**
+On trouve alors le mot de passe en clair : **cavefishandgoblin**.
 
 # Level 3
 
-En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape entrer sans rien écrire.
+En premier lieu, on teste le lvl 3, et on parvient à obtenir 2 messages d’erreur différents. Le premier lorsqu’on écrit quelque chose, et le deuxième lorsqu’on tape « entrée » sans rien écrire.
 
 ![exemple](./img/3-0.png)
+![exemple](./img/3-1.png)
 
 Une fois dans IDA, après avoir remarqué que le schéma représentant le code de lvl_3 était très étendu en largeur, nous avons choisi d’analyser en premier les blocs du bas. Il y a 2 blocs vers lesquels arrivent tous les autres.
 Sur celui-ci, qui est situé au milieu en bas, on constate un return avec l’instruction « retn ». C’est donc le bloc qui terminera le programme. On renomme ce bloc en « end : ».
@@ -222,20 +223,20 @@ for i in hidden_password:
 print password
 ```
 
-On trouve alors le mot de passe en clair : **debugm3**
+On trouve alors le mot de passe en clair : **debugm3**.
 
 # Level 5
 
-Même sans connaitre Lord of the RINGs nous pouvons déduire le flag, qui sera probablement 'RING' mais surement avec un leetspeak équivalent.
+Même sans connaître Lord of the RINGs nous pouvons déduire le flag, qui sera probablement 'RING' mais sûrement avec un leetspeak équivalent.
 
-Si je décidais de brute force ce challenge étant donné la taille probable de la chaine, ce serait un jeu d'enfant, mais continuons d'analyser le code sinon cela ne serait pas amusant.
+Si je décidais de bruteforce ce challenge étant donné la taille probable de la chaîne, ce serait un jeu d'enfant, mais continuons d'analyser le code sinon cela ne serait pas amusant.
 
 ![level_5](./img/5-0.png)
 
 ![level_5](./img/5-1.png)
 ![level_5](./img/5-2.png)
 
-Dans le premier bloc la chaine entrée en paramètre est récupérée et le \n est remplacé par un \0 d'une part, et ensuite il y a une vérification de la taille de la chaine entrée par l'utilisateur.
+Dans le premier bloc la chaîne entrée en paramètre est récupérée et le \n est remplacé par un \0 d'une part, et ensuite il y a une vérification de la taille de la chaîne entrée par l'utilisateur.
 
 Cela valide notre hypothèse sur le flag 'RING'.
 
@@ -249,8 +250,8 @@ Puis nous passons au bloc de fin de fonction.
 Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.  
 
 ![level_5](./img/5_check_1.png)
-
-Nous pouvons résumer cette partie par l'équation ci-dessous
+  
+Nous pouvons résumer cette partie par l'équation ci-dessous :
 
 ![level_5](./img/lvl5_a.png)
 
@@ -258,7 +259,7 @@ Si l’on rentre dans les détails, on récupère le premier et le dernier (4e) 
 
 ![level_5](./img/5_check-2.png)
 
-Dans ce second bloc, on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`. Finalement, le résultat est comparé avec `0x18`.
+Dans ce second bloc, on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`. Enfin, le résultat est comparé avec `0x18`.
 
 Nous obtenons donc l'équation suivante :
 
@@ -268,7 +269,7 @@ Ce bloc, simple mais essentiel à la résolution de ce challenge, nous permet de
 
 ![level_5](./img/5_check-3.png)
 
-Ci-dessous l'équation associée :
+Ci-dessous l'équation associée : 
 
 ![level_5](./img/lvl5_c.png)
 
@@ -284,7 +285,7 @@ Pour terminer nous apercevons les deux blocs possibles avant d'arriver au bloc d
 
 Celui à gauche est atteint si les quatre blocs du dessus sont validés sinon nous arrivons dans le bloc de droite.
 
-Nous pouvons voir que la valeur de retour est 1 si les conditions sont validées (0 sinon) ce qui valide notre analyse précédente de la fonction level_5
+Nous pouvons voir que la valeur de retour est 1 si les conditions sont validées (0 sinon) ce qui valide notre analyse précédente de la fonction level_5.
 
 ![level_5](./img/5_check-5.png)
 
@@ -292,7 +293,7 @@ Afin de trouver le flag nous devons résoudre le système d'équations ci-dessou
 
 ![level_5](./img/lvl5_e.png)
 
-Ayant déjà le troisième caractère en clair ('N') nous allons commencer par résoudre les équations avec celui-ci.
+Ayant déjà le troisième caractère en clair ('N'), nous allons commencer par résoudre les équations avec celui-ci.
 
 ![level_5](./img/lvl5_f.png)
 
@@ -303,7 +304,7 @@ Ayant déjà le troisième caractère en clair ('N') nous allons commencer par r
 ![level_5](./img/lvl5_i.png)
 
 
-On trouve donc le flag : **R1Ng**
+On trouve donc le flag : **R1Ng**.
 
 # Level 6
 
@@ -329,13 +330,13 @@ En prenant les paramètres edi, ecx et edx en compte nous avons `memset(var_D4, 
 Il en est de même pour le second buffer partant de var_254 `memset(var_254, 0, 96)`
 Dans les deux cas nous avons après chaque opération stosd une suite de 6 affectations pour chaque buffer.
 
-Pour faire simple nous initialisons deux buffers à 0, l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
+Pour faire simple nous initialisons deux buffers à 0, l'un de taille 48 et l'autre de taille 96, puis nous mettons 12 valeurs à 1, 6 par buffer.
 
-Pour terminer il y a une vérification de la taille de la chaine saisie par l'utilisateur.
+Une vérification de la taille de la chaine saisie par l'utilisateur a lieu en dernier.
 
-**Premier indice :** la taille de la chaine est de 6
+**Premier indice :** la taille de la chaine est de 6 caractères.
 
-Dans le cas actuel des choses nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons bruteforcer facilement ce challenge en un temps restreint. Mais pour le plaisir nous allons continuer notre analyse.
+Dans le contexte actuel, nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons bruteforcer facilement ce challenge en un temps restreint. Mais pour le plaisir nous allons continuer notre analyse.
 
 ![level_6_a](./img/6-4.png)
 
@@ -353,11 +354,11 @@ Ensuite nous reprenons le caractere_brut afin d'y appliquer une opération ET lo
 
 Puis nous récupérons le caractere_shifted dans eax et le compteur dans edx que nous multiplions par 16 suite à une opération de shift left par 4.
 
-Après cela nous effectuons la somme (caractere_shifted + cmp * 4)
+Après cela nous effectuons la somme (caractere_shifted + cmp * 4).
 
-Ensuite nous allons chercher dans le buffer 1 (var_D4 memset) à l'adresse [ebp+eax*2+var_4] afin de vérifier si nous tombons sur un 0 ou un 1, si la valeur est un 1 cela veut dire que le caractère courant passe la première condition, dans le cas contraire ou l'on tombe sur un zero on jump vers le message d'erreur.
+Ensuite, nous allons chercher dans le buffer 1 (var_D4 memset) à l'adresse [ebp+eax*2+var_4] afin de vérifier si nous tombons sur un 0 ou un 1, si la valeur est un 1 cela veut dire que le caractère courant passe la première condition, dans le cas contraire ou l'on tombe sur un zero on jump vers le message d'erreur.
 
-En résumé pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
+En résumé, pour passer la condition de ce bloc il faut que le caractère courant passe la condition suivante :
 var_D4[(char/16 + cmpt*16) * 2] == 1
 
 ![level_6_a](./img/6-6.png)
@@ -371,7 +372,7 @@ var_254[()(char & 15) + (cmpt*16)) * 4] == 1
 
 ![level_6_a](./img/6-7.png)
 
-Le second test passé, on incrémente le compteur afin de vérifier le caractère suivant.
+Une fois le second test passé, on incrémente le compteur afin de vérifier le caractère suivant.
 
 A ce stade afin de récupérer le flag nous pourrions utiliser le script suivant :
 
@@ -399,7 +400,7 @@ print res
 
 ![level_6_a](./img/6-8.png)
 
-Une fois que les 6 caractères passent les deux conditions nous sortons de la boucle pour arriver au bloc affichant le message de succès et aussi la "répose" du moins un gros indice permettant de déterminer le flag.
+Une fois que les 6 caractères passent les deux conditions nous sortons de la boucle pour arriver au bloc affichant le message de succès et aussi la "réponse" du moins un gros indice permettant de déterminer le flag.
 
 En prenant en compte cet indice nous pouvons améliorer notre script et passer à celui ci-dessous :
 
@@ -437,12 +438,12 @@ print res
 
 ![level_6_a](./img/6-9.png)
 
-Dans tous les cas, pour terminer, nous passons par ce bloc qui est la fin de la fonction
+Dans tous les cas, pour terminer, nous passons par ce bloc qui est la fin de la fonction.
 
 ![level_6_a](./img/6-10.png)
 
 
-Le script lancé, nous trouvons le flag qui est : **L1gH7s**
+Une fois le script lancé, nous trouvons le flag : **L1gH7s**.
 
 # Level 7
 
@@ -529,3 +530,4 @@ On trouve alors les flags suivants :
 39357  
 39358  
 39359**  
+
