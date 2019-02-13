@@ -231,34 +231,32 @@ Même sans connaitre Lord of the RINGs nous pouvons déduire le flag, qui sera p
 
 Si je décidais de brute force ce challenge étant donné la taille probable de la chaine, ce serait un jeu d'enfant, mais continuons d'analyser le code sinon cela ne serait pas amusant.
 
-![level_5](./img/5_a.png)
+![level_5](./img/5-0.png)
 
-Dans ce premier bloc la chaine entrée en paramètre est récupérée et le \n est remplacé par un \0 d'une part, et ensuite il y a une vérification de la taille de la chaine entrée par l'utilisateur.
+![level_5](./img/5-1.png)
+![level_5](./img/5-2.png)
+
+Dans le premier bloc la chaine entrée en paramètre est récupérée et le \n est remplacé par un \0 d'une part, et ensuite il y a une vérification de la taille de la chaine entrée par l'utilisateur.
 
 Cela valide notre hypothèse sur le flag 'RING'.
-
-![level_5](./img/5_b.png)
 
 Dans le cas où la taille de la chaîne n'est pas de 4, on jump vers le print_fail_msg et comme son nom l'indique c'est le message de la défaite.
 
 Dans le cas contraire, cela appelle la fonction level_5_checkpassword avec la saisie utilisateur en paramètre.
 
 Ensuite, si la fonction renvoie une réponse différente de zéro, le programme va afficher le message de succès.
-
-![level_5](./img/5_c.png)
-
 Puis nous passons au bloc de fin de fonction.
 
 Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.
 
-![level_5](./img/5_d.png)
+![level_5](./img/5_check_1.png)
 Nous pouvons résumer cette partie par l'équation ci-dessous
 
 ![level_5](./img/lvl5_a.png)
 
 Si l’on rentre dans les détails, on récupère le premier et le dernier (4e) caractère, on les additionne est on les compare avec la valeur `0xB9`.
 
-![level_5](./img/5_e.png)
+![level_5](./img/5_check-2.png)
 
 Dans ce second bloc, on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`. Finalement, le résultat est comparé avec `0x18`.
 
@@ -268,7 +266,7 @@ Nous obtenons donc l'équation suivante :
 
 Ce bloc, simple mais essentiel à la résolution de ce challenge, nous permet de voir que le 3ème caractère est comparé avec la valeur `0x4E` qui vaut 'N'
 
-![level_5](./img/5_f.png)
+![level_5](./img/5_check-3.png)
 
 Ci-dessous l'équation associée : 
 
@@ -276,8 +274,7 @@ Ci-dessous l'équation associée :
 
 Ce dernier bloc de code compare la valeur `0xB5` avec la somme des deux derniers caractères.
 
-
-![level_5](./img/5_g.png)
+![level_5](./img/5_check-4.png)
 
 L'équation correspondante :
 
@@ -289,7 +286,7 @@ Celui à gauche est atteint si les quatre blocs du dessus sont validés sinon no
 
 Nous pouvons voir que la valeur de retour est 1 si les conditions sont validées (0 sinon) ce qui valide notre analyse précédente de la fonction level_5
 
-![level_5](./img/5_h.png)
+![level_5](./img/5_check-5.png)
 
 Afin de trouver le flag nous devons résoudre le système d'équations ci-dessous :
 
