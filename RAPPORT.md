@@ -440,7 +440,7 @@ print res
 
 Dans tous les cas, pour terminer, nous passons par ce bloc qui est la fin de la fonction
 
-![level_6_a](./img/6-9.png)
+![level_6_a](./img/6-10.png)
 
 
 Le script lancé, nous trouvons le flag qui est : **L1gH7s**
