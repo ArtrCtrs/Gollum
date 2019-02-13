@@ -239,28 +239,63 @@ Cela valide notre hypothèse sur le flag 'RING'.
 
 ![level_5](./img/5_b.png)
 
+Dans le cas où la taille de la chaine n'ai pas de 4 on jump vers le print_fail_msg et comme son nom l'indique c'est le message de la défaite.
+
+Dans le cas contraire cela appelle la fonction level\_5\_checkpassword avec la saisie utilisateur en parametre.
+
+Ensuite, si la fonction renvoie une réponse différent de zéro alors le programme va affiché le message de succès.
 
 ![level_5](./img/5_c.png)
 
+Puis nous passons au bloc de fin de fonction.
+
+Cette partie maintenant analysé nous allons nous pencher sur le contenue de la fonction level\_5\_checkpassword.
+
 ![level_5](./img/5_d.png)
+Nous pouvons résummer cette partie par l'équation ci dessous
 
 ![level_5](./img/lvl5_a.png)
 
+Cependant si on entre dans les détails, on récupére le premier et le dernier (4e) charactère, on les aditionne est on les compare avec la valeur `0xB9`.
+
 ![level_5](./img/5_e.png)
+
+Dans ce second bloque on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`, puis le résultat est comparé avec `0x18`.
+
+Nous obtenons donc l'équation suivante:
 
 ![level_5](./img/lvl5_b.png)
 
+Ce bloque gère simple mais essentiel à la résolution de ce challenge nous pouvons voir que le 3ème caractère est comparé avec la valeur `0x4E` qui vaut 'N'
+
 ![level_5](./img/5_f.png)
+
+Ci-dessous l'équation associé : 
 
 ![level_5](./img/lvl5_c.png)
 
+Ce dernier bloc de code compare la valeur `0xB5` avec ka somme des deux derniers caractères.
+
+
 ![level_5](./img/5_g.png)
+
+L'équation correspondante :
 
 ![level_5](./img/lvl5_d.png)
 
+Pour terminer nous avons les deux blocs possible avant d'arriver au bloc de fin de fonction.
+
+Celui à gauche est atteint ci on les quatres blocs du dessus sont validé sinon nous atérison dans le bloc de droite.
+
+Nous pouvons voir que la valeur de retour est 1 si les conditions sont validé (0 sinon) ce qui valide notre analyse précédente de la fonction level\_5
+
 ![level_5](./img/5_h.png)
 
+Afin de trouver le flag nous devons résoudre le système d'équations ci desous :
+
 ![level_5](./img/lvl5_e.png)
+
+Ayant déjà le trosième caractère en claire ('N') nous allons commencé par résoudre les équationn avec celui ci.
 
 ![level_5](./img/lvl5_f.png)
 
