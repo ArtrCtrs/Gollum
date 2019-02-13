@@ -227,7 +227,7 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 5
 
-Meme sans connaitre lord of the RING nous pouvons déduire le flag, le flag sera probablement 'RING' mais surrement un leetspeak équivalent.
+Meme sans connaitre Lord of the RINGs nous pouvons déduire le flag, le flag sera probablement 'RING' mais surrement un leetspeak équivalent.
 
 Si je décidé de brut force ce chalenge étant donné la taille probable de la chaine ce serais un jeu d'enfant mais continuons d'analysé le code sinon cela ne serais pas fun.
 
@@ -241,7 +241,7 @@ Cela valide notre hypothèse sur le flag 'RING'.
 
 Dans le cas où la taille de la chaine n'ai pas de 4 on jump vers le print_fail_msg et comme son nom l'indique c'est le message de la défaite.
 
-Dans le cas contraire cela appelle la fonction level\_5\_checkpassword avec la saisie utilisateur en parametre.
+Dans le cas contraire cela appelle la fonction level_5_checkpassword avec la saisie utilisateur en parametre.
 
 Ensuite, si la fonction renvoie une réponse différent de zéro alors le programme va affiché le message de succès.
 
@@ -249,7 +249,7 @@ Ensuite, si la fonction renvoie une réponse différent de zéro alors le progra
 
 Puis nous passons au bloc de fin de fonction.
 
-Cette partie maintenant analysé nous allons nous pencher sur le contenue de la fonction level\_5\_checkpassword.
+Cette partie maintenant analysé nous allons nous pencher sur le contenue de la fonction level_5_checkpassword.
 
 ![level_5](./img/5_d.png)
 Nous pouvons résummer cette partie par l'équation ci dessous
@@ -287,7 +287,7 @@ Pour terminer nous avons les deux blocs possible avant d'arriver au bloc de fin 
 
 Celui à gauche est atteint ci on les quatres blocs du dessus sont validé sinon nous atérison dans le bloc de droite.
 
-Nous pouvons voir que la valeur de retour est 1 si les conditions sont validé (0 sinon) ce qui valide notre analyse précédente de la fonction level\_5
+Nous pouvons voir que la valeur de retour est 1 si les conditions sont validé (0 sinon) ce qui valide notre analyse précédente de la fonction level_5
 
 ![level_5](./img/5_h.png)
 
@@ -327,6 +327,7 @@ Ensuite nous récupérons la taille réelle (sans retour chariot) et nous la met
 Cette partie du code peut paraitre au premier abord compliqué mais nous allons voir que la compréhension de cette partie est essentielle dans la résolution de l'exercice.
 
 En premier lieu, une opération `stosd` : cette opération peut s’apparenter à la fonction `memset` en C.
+
 En prenant les paramètres edi, ecx et edx en compte nous avons `memset(var_D4, 0, 48)` pour le premier buffer (partant de var_D4).
 Il en est de même pour le second buffer partant de var_254 `memset(var_254, 0, 96)`
 Dans les deux cas nous avons après chaque opération stosd une suite de 6 effectations pour chaque buffer.
@@ -335,9 +336,9 @@ Pour faire simple nous initialisons deux buffer à 0, l'un de taille 48 et l'aut
 
 Pour terminer il y a une vérification de la taille de la chaine saisie par l'utilisateur.
 
-Premier indice : la taille de la chaine est de 6
+**Premier indice :** la taille de la chaine est de 6
 
-Dans le cas actuel des choses nous avons $256^6$ possibilités. Avec les processeurs actuels nous pouvons brute force facilement ce challenge en moins de 10 secondes. Mais pour le plaisir nous allons continuer notre analyse.
+Dans le cas actuel des choses nous avons `256^6` possibilités. Avec les processeurs actuels nous pouvons brute force facilement ce challenge en moins de 10 secondes. Mais pour le plaisir nous allons continuer notre analyse.
 
 ![level_6_a](./img/lev_6_d.png)
 
