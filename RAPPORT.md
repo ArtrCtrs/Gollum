@@ -61,10 +61,10 @@ Sinon, on continue dans un bloc qui semble être une boucle :
 ![exemple](./img/2-3.png)
 
 Cette boucle déplace les pointeurs des chaînes de caractères user_input et long_text en fonction des valeurs de counter_1 et counter_2.  
-counter_1 s'incrémentant toujours de 1, le pointeur de user_input se déplacera de 1 charactère.  
-counter_2 s'incrémentant toujours de 5, le pointeur de long_text se déplacera de 5 charactères.  
+counter_1 s'incrémentant toujours de 1, le pointeur de user_input se déplacera de 1 caractère.  
+counter_2 s'incrémentant toujours de 5, le pointeur de long_text se déplacera de 5 caractère.  
 Attention, il faut prendre en compte que counter_2 a été initialisé à la valeur 256.  
-Enfin, on récupère les premiers charactères de user_input et de long_text puis on les compare pour voir s'ils sont identiques.  
+Enfin, on récupère les premiers caractères de user_input et de long_text puis on les compare pour voir s'ils sont identiques.  
 
 S'ils ne sont pas identiques, le bloc suivant affichera un message d'erreur en rouge puis quittera la fonction level_2 :  
 
@@ -74,9 +74,9 @@ S'ils sont identiques, on passe au bloc suivant qui va incrémenter les compteur
 
 ![exemple](./img/2-5.png)
 
-Après l'incrémentation des compteurs, on revient dans la boucle pour tester les prochains charactères.
+Après l'incrémentation des compteurs, on revient dans la boucle pour tester les prochains caractères.
 
-Suite à ces observations, on peut déduire que le flag à trouver commence au charactère 256 de la chaîne de caractères long_text et contiendra toutes les lettres qui se situent par incrément de 5 plus loin, jusqu'à ce que l'on sorte de long_text.  
+Suite à ces observations, on peut déduire que le flag à trouver commence au caractère 256 de la chaîne de caractères long_text et contiendra toutes les lettres qui se situent par incrément de 5 plus loin, jusqu'à ce que l'on sorte de long_text.  
 Le counter_1 ne sert qu'à itérer sur l'entrée de l'utilisateur.  
 On peut faire un script Python simpliste qui implémente ce comportement :  
 
@@ -148,30 +148,30 @@ On peut apercevoir que le programme nous demande un mot de passe dans le quatri�
 
 ![exemple](./img/4-1.png)
 
-Le premier bloc traite l'entrée utilisateur pour supprimer le charactère "entrée", ou "\n".  
-On peut voir qu'une chaîne de charactères mystérieuse est aussi stockée en mémoire dans ebp+var_10.  
-IDA nous facilite la tâche grâce à la HEX view qui nous permet de voir les charactères stockés au format hexadécimal :  
+Le premier bloc traite l'entrée utilisateur pour supprimer le caractère "entrée", ou "\n".  
+On peut voir qu'une chaîne de caractères mystérieuse est aussi stockée en mémoire dans ebp+var_10.  
+IDA nous facilite la tâche grâce à la HEX view qui nous permet de voir les caractères stockés au format hexadécimal :  
 
 ![exemple](./img/4-hex.png)
 
-Ensuite, le bloc regarde si des charactères sont présents dans l'entrée utilisateur.  
+Ensuite, le bloc regarde si des caractères sont présents dans l'entrée utilisateur.  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-2.png)
 
-Si l'entrée utilisateur contient au moins 1 charactère, on arrive sur ce bloc :  
+Si l'entrée utilisateur contient au moins 1 caractère, on arrive sur ce bloc :  
 
 ![exemple](./img/4-3.png)
 
 Ce bloc vérifie que l'entrée utilisateur fait au moins la taille du mot de passe "caché".  
 On stocke la longueur de l'entrée utilisateur dans ebx, puis la longueur du mot de passe "caché" contenu dans ebp+var_10 dans eax.  
-On peut voir que le mot de passe caché fait 7 charactères en débuggant avec gdb.  
-On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 7 charactères (jump not below).  
+On peut voir que le mot de passe caché fait 7 caractères en débuggant avec gdb.  
+On compare ebx et eax puis on saute si l'entrée utilisateur fait au moins 7 caractères (jump not below).  
 Dans le cas contraire, le bloc suivant affichera un message d'erreur puis quittera la fonction level_4 :  
 
 ![exemple](./img/4-7.png)
 
-Si l'entrée utilisateur fait au moins 7 charactères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
+Si l'entrée utilisateur fait au moins 7 caractères, on arrive sur ce bloc qui déplace l'entrée utilisateur dans ebp+var_C :
 
 ![exemple](./img/4-4.png)
 
@@ -187,10 +187,10 @@ Si le caractère est nul, le bloc suivant affichera un message de succès (coule
 ![exemple](./img/4-9.png)
 
 Si le caractère n'est pas nul, la boucle continue.  
-Ce bloc stocke le charactère du mot de passe caché de l'itération courante dans ecx.  
-Il récupère aussi le charactère de l'entrée utilisateur de l'itération courante, puis effectue une opération XOR avec le nombre 187 dessus.  
+Ce bloc stocke le caractère du mot de passe caché de l'itération courante dans ecx.  
+Il récupère aussi le caractère de l'entrée utilisateur de l'itération courante, puis effectue une opération XOR avec le nombre 187 dessus.  
 Enfin, la valeur est stockée dans eax, et plus précisément dans al (premier byte de eax).  
-Une fois ces deux charactères stockés, on les compare.  
+Une fois ces deux caractères stockés, on les compare.  
 
 ![exemple](./img/4-6.png)
 
@@ -200,7 +200,7 @@ S'ils ne sont pas égaux (code ASCII différent), le bloc suivant affichera un m
 
 S'ils sont égaux (même code ASCII), on revient au début de la boucle.
 
-On comprend maintenant que le mot de passe à trouver correspond à une chaîne de 7 caractères dont chaque caractère correspond au xor de 187 des charactères suivants :
+On comprend maintenant que le mot de passe à trouver correspond à une chaîne de 7 caractères dont chaque caractère correspond au xor de 187 des caractères suivants :
 0DF  
 0DE  
 0D9  
@@ -227,54 +227,54 @@ On trouve alors le mot de passe en clair : **debugm3**
 
 # Level 5
 
-Meme sans connaitre Lord of the RINGs nous pouvons déduire le flag, le flag sera probablement 'RING' mais surrement un leetspeak équivalent.
+Même sans connaitre Lord of the RINGs nous pouvons déduire le flag, qui sera probablement 'RING' mais surement avec un leetspeak équivalent.
 
-Si je décidé de brut force ce chalenge étant donné la taille probable de la chaine ce serais un jeu d'enfant mais continuons d'analysé le code sinon cela ne serais pas fun.
+Si je décidais de brute force ce challenge étant donné la taille probable de la chaine, ce serait un jeu d'enfant, mais continuons d'analyser le code sinon cela ne serait pas amusant.
 
 ![level_5](./img/5_a.png)
 
-Ce premier bloque la chaine entrée en paramètre est récupéré et le \n est remplacé par un \0 d'une part et ensuite il y a une verification de la taille de la chaine entré par l'utilisateur.
+Dans ce premier bloc la chaine entrée en paramètre est récupérée et le \n est remplacé par un \0 d'une part, et ensuite il y a une vérification de la taille de la chaine entrée par l'utilisateur.
 
 Cela valide notre hypothèse sur le flag 'RING'.
 
 ![level_5](./img/5_b.png)
 
-Dans le cas où la taille de la chaine n'ai pas de 4 on jump vers le print_fail_msg et comme son nom l'indique c'est le message de la défaite.
+Dans le cas où la taille de la chaîne n'est pas de 4, on jump vers le print_fail_msg et comme son nom l'indique c'est le message de la défaite.
 
-Dans le cas contraire cela appelle la fonction level_5_checkpassword avec la saisie utilisateur en parametre.
+Dans le cas contraire, cela appelle la fonction level_5_checkpassword avec la saisie utilisateur en paramètre.
 
-Ensuite, si la fonction renvoie une réponse différent de zéro alors le programme va affiché le message de succès.
+Ensuite, si la fonction renvoie une réponse différente de zéro, le programme va afficher le message de succès.
 
 ![level_5](./img/5_c.png)
 
 Puis nous passons au bloc de fin de fonction.
 
-Cette partie maintenant analysé nous allons nous pencher sur le contenue de la fonction level_5_checkpassword.
+Cette partie maintenant analysée, nous allons nous pencher sur le contenu de la fonction level_5_checkpassword.
 
 ![level_5](./img/5_d.png)
-Nous pouvons résummer cette partie par l'équation ci dessous
+Nous pouvons résumer cette partie par l'équation ci-dessous
 
 ![level_5](./img/lvl5_a.png)
 
-Cependant si on entre dans les détails, on récupére le premier et le dernier (4e) charactère, on les aditionne est on les compare avec la valeur `0xB9`.
+Si l’on rentre dans les détails, on récupère le premier et le dernier (4e) caractère, on les additionne est on les compare avec la valeur `0xB9`.
 
 ![level_5](./img/5_e.png)
 
-Dans ce second bloque on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`, puis le résultat est comparé avec `0x18`.
+Dans ce second bloc, on récupère les trois derniers caractères et on applique une opération arithmétique de type `XOR`. Finalement, le résultat est comparé avec `0x18`.
 
-Nous obtenons donc l'équation suivante:
+Nous obtenons donc l'équation suivante :
 
 ![level_5](./img/lvl5_b.png)
 
-Ce bloque gère simple mais essentiel à la résolution de ce challenge nous pouvons voir que le 3ème caractère est comparé avec la valeur `0x4E` qui vaut 'N'
+Ce bloc, simple mais essentiel à la résolution de ce challenge, nous permet de voir que le 3ème caractère est comparé avec la valeur `0x4E` qui vaut 'N'
 
 ![level_5](./img/5_f.png)
 
-Ci-dessous l'équation associé : 
+Ci-dessous l'équation associée : 
 
 ![level_5](./img/lvl5_c.png)
 
-Ce dernier bloc de code compare la valeur `0xB5` avec ka somme des deux derniers caractères.
+Ce dernier bloc de code compare la valeur `0xB5` avec la somme des deux derniers caractères.
 
 
 ![level_5](./img/5_g.png)
@@ -283,19 +283,19 @@ L'équation correspondante :
 
 ![level_5](./img/lvl5_d.png)
 
-Pour terminer nous avons les deux blocs possible avant d'arriver au bloc de fin de fonction.
+Pour terminer nous apercevons les deux blocs possibles avant d'arriver au bloc de fin de fonction.
 
-Celui à gauche est atteint ci on les quatres blocs du dessus sont validé sinon nous atérison dans le bloc de droite.
+Celui à gauche est atteint si les quatre blocs du dessus sont validés sinon nous arrivons dans le bloc de droite.
 
-Nous pouvons voir que la valeur de retour est 1 si les conditions sont validé (0 sinon) ce qui valide notre analyse précédente de la fonction level_5
+Nous pouvons voir que la valeur de retour est 1 si les conditions sont validées (0 sinon) ce qui valide notre analyse précédente de la fonction level_5
 
 ![level_5](./img/5_h.png)
 
-Afin de trouver le flag nous devons résoudre le système d'équations ci desous :
+Afin de trouver le flag nous devons résoudre le système d'équations ci-dessous :
 
 ![level_5](./img/lvl5_e.png)
 
-Ayant déjà le trosième caractère en claire ('N') nous allons commencé par résoudre les équationn avec celui ci.
+Ayant déjà le troisième caractère en clair ('N') nous allons commencer par résoudre les équations avec celui-ci.
 
 ![level_5](./img/lvl5_f.png)
 
@@ -330,9 +330,9 @@ En premier lieu, une opération `stosd` : cette opération peut s’apparenter �
 
 En prenant les paramètres edi, ecx et edx en compte nous avons `memset(var_D4, 0, 48)` pour le premier buffer (partant de var_D4).
 Il en est de même pour le second buffer partant de var_254 `memset(var_254, 0, 96)`
-Dans les deux cas nous avons après chaque opération stosd une suite de 6 effectations pour chaque buffer.
+Dans les deux cas nous avons après chaque opération stosd une suite de 6 affectations pour chaque buffer.
 
-Pour faire simple nous initialisons deux buffer à 0, l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
+Pour faire simple nous initialisons deux buffers à 0, l'un de taille 48 et l'autre de taille 96. Ensuite nous mettons 12 valeurs à 1, 6 par buffer.
 
 Pour terminer il y a une vérification de la taille de la chaine saisie par l'utilisateur.
 
